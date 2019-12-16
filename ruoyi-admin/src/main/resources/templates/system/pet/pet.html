@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('宠物列表')"/>
+    <th:block th:include="include :: layout-latest-css"/>
+    <th:block th:include="include :: ztree-css"/>
+</head>
+<body class="gray-bg">
+<div class="ui-layout-center">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="user-form">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                宠物名称：<input type="text" name="name"/>
+                            </li>
+                            <li>
+                                宠物类型：<input type="text" name="type"/>
+                            </li>
+<!--                            <li>-->
+<!--                                性别：<input type="text" name="sex"/>-->
+<!--                            </li>-->
+                            <li>
+                                领养状态：<input type="text" name="status"/>
+                            </li>
+                            <li class="select-time">
+                                <label>创建时间： </label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间"
+                                       name="params[beginTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间"
+                                       name="params[endTime]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                        class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                        class="fa fa-refresh"></i>重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:pet:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()"
+                   shiro:hasPermission="system:pet:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
+                   shiro:hasPermission="system:pet:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: layout-latest-js"/>
+<th:block th:include="include :: ztree-js"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:pet:remove')}]];
+    var resetPwdFlag = [[${@permission.hasPermi('system:pet:resetPwd')}]];
+    var prefix = ctx + "system/pet";
+
+    $(function () {
+        var panehHidden = false;
+        if ($(this).width() < 769) {
+            panehHidden = true;
+        }
+        $('body').layout({initClosed: panehHidden, west__size: 185});
+        queryUserList();
+        queryDeptTree();
+    });
+
+    function queryUserList() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            sortName: "createTime",
+            sortOrder: "desc",
+            modalName: "宠物",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'id',
+                    title: '宠物id'
+                },
+                {
+                    field: 'name',
+                    title: '宠物名称',
+                },
+                {
+                    field: 'type',
+                    title: '宠物类型'
+                },
+                {
+                    field: 'sex',
+                    title: '性别',
+                    formatter: function (value, item, index) {
+                        if(item.sex===1){
+                            return '雄性';
+                        }else {
+                            return '雌性';
+                        }
+                    }
+                },
+                {
+                    field: 'adoptStatu',
+                    title: '领养状态'
+                },
+                {
+                    field: 'fostStatu',
+                    title: '寄养状态',
+                    formatter: function (value, item, index) {
+                        if(item.fostStatu===1){
+                            return '不是寄养的宠物';
+                        }else {
+                            return '是寄养的宠物';
+                        }
+                    }
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
+                },
+                {
+                    field: 'createBy',
+                    title: '创建者'
+                },
+				{
+                    field: 'createTime',
+                    title: '创建时间',
+                    sortable: true
+                },
+				{
+                    field: 'updateBy',
+                    title: '更新者'
+                },
+				{
+                    field: 'updateTime',
+                    title: '更新时间',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                        actions.push('<a class="btn btn-info btn-xs ' + resetPwdFlag + '" href="javascript:void(0)" onclick="showImage(\'' + row.id + '\')"><i class="fa fa-key"></i>照片预览</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    }
+
+
+    $('#btnCollapse').click(function () {
+        $._tree.expandAll(false);
+        $(this).hide();
+        $('#btnExpand').show();
+    });
+
+    $('#btnRefresh').click(function () {
+        queryDeptTree();
+    });
+
+</script>
+</body>
+</html>
