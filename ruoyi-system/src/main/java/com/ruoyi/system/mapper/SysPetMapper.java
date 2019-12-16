@@ -26,4 +26,6 @@ public interface SysPetMapper {
 
             })
     List<SysPet> selectPetList(SysPet sysPet);
+    @Select("SELECT  ImageUrl  FROM sys_pet WHERE id=#{id}")
+    String findImageUrl(String id);
 }

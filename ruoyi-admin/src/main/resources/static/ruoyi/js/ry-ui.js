@@ -1155,7 +1155,7 @@ var table = {
                 $.modal.closeLoading();
             },
 			showImage: function (id) {
-				   $.modal.open("图片预览",$.operate.editUrl(id));
+				   $.modal.open("图片预览","/system/pet/showImage/"+id);
 			}
 		},
         // 校验封装处理

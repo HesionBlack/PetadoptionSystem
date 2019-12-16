@@ -40,4 +40,16 @@ public class SysPetController extends BaseController
         List<SysPet> list = petService.selectPetList(sysPet);
         return getDataTable(list);
     }
+
+    /**
+     * 角色分配数据权限
+     */
+    @GetMapping("/showImage/{id}")
+    public String authDataScope(@PathVariable("id") String id, ModelMap mmap)
+    {
+        mmap.put("imageUrl", petService.findImageUrl(id));
+        return prefix + "/showImage";
+    }
+
+
 }

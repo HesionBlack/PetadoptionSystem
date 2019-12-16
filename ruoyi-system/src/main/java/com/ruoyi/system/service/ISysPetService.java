@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface ISysPetService {
     List<SysPet> selectPetList(SysPet sysPet);
+
+    String  findImageUrl(String id);
 }

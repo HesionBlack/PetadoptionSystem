@@ -34,4 +34,9 @@ public class SysPetServiceImpl implements ISysPetService {
     public List<SysPet> selectPetList(SysPet sysPet) {
         return sysPetMapper.selectPetList(sysPet);
     }
+
+    @Override
+    public String findImageUrl(String id) {
+        return sysPetMapper.findImageUrl(id);
+    }
 }
