@@ -1153,8 +1153,11 @@ var table = {
                     $.modal.alertError(result.msg);
                 }
                 $.modal.closeLoading();
-            }
-        },
+            },
+			showImage: function (id) {
+				   $.modal.open("图片预览",$.operate.editUrl(id));
+			}
+		},
         // 校验封装处理
         validate: {
         	// 判断返回标识是否唯一 false 不存在 true 存在
