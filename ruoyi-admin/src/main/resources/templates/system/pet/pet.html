@@ -81,7 +81,6 @@
         }
         $('body').layout({initClosed: panehHidden, west__size: 185});
         queryUserList();
-        queryDeptTree();
     });
 
     function queryUserList() {
@@ -176,10 +175,6 @@
         $._tree.expandAll(false);
         $(this).hide();
         $('#btnExpand').show();
-    });
-
-    $('#btnRefresh').click(function () {
-        queryDeptTree();
     });
 
 </script>

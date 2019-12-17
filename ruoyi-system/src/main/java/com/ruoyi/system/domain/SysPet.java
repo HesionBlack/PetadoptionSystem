@@ -28,13 +28,13 @@ public class SysPet extends BaseEntity {
       private String name;
       private String type;
       private Date createTime;
-      private String adoptStatu;
-      private int fostStatu;
-      private int sex;
+      private Integer adoptStatu;
+      private Integer fostStatu;
+      private Integer sex;
       private String imageUrl;
       private String createBy;
       private String updateBy;
       private Date  updateTime;
       private String remark;
-      private int del_flag;
+      private Integer del_flag;
 }

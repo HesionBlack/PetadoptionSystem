@@ -62,7 +62,7 @@
 		    };
 			$.tree.init(options);
 		});
-		
+
 		$("#form-role-add").validate({
 			rules:{
 				onkeyup: false,
@@ -110,13 +110,13 @@
 		    },
 		    focusCleanup: true
 		});
-		
+
 		function submitHandler() {
 	        if ($.validate.form()) {
 	        	add();
 	        }
 	    }
-	
+
 		function add() {
 			var roleName = $("input[name='roleName']").val();
 			var roleKey = $("input[name='roleKey']").val();

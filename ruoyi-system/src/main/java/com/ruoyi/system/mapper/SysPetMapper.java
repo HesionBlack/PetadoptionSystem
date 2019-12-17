@@ -1,10 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import com.ruoyi.system.domain.SysPet;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -28,4 +25,8 @@ public interface SysPetMapper {
     List<SysPet> selectPetList(SysPet sysPet);
     @Select("SELECT  ImageUrl  FROM sys_pet WHERE id=#{id}")
     String findImageUrl(String id);
+@Insert("INSERT INTO" +
+        "  sys_pet  " +
+        "VALUES(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.adoptStatu},#{p.fostStatu},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag})")
+    int savePet(@Param("p") SysPet sysPet);
 }

@@ -16,4 +16,6 @@ public interface ISysPetService {
     List<SysPet> selectPetList(SysPet sysPet);
 
     String  findImageUrl(String id);
+
+    int savePet(SysPet sysPet);
 }
