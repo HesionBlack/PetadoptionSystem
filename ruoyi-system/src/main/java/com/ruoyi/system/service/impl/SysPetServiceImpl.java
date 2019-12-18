@@ -52,4 +52,14 @@ public class SysPetServiceImpl implements ISysPetService {
         String[] id = ids.split(",");
         return sysPetMapper.deletePetByIds(id);
     }
+
+    @Override
+    public SysPet selectPetById(String petId) {
+        return sysPetMapper.selectPetById(petId);
+    }
+
+    @Override
+    public int editPet(SysPet sysPet) {
+        return sysPetMapper.editPet(sysPet);
+    }
 }

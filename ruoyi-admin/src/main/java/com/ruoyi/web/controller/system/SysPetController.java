@@ -37,7 +37,7 @@ public class SysPetController extends BaseController {
     @Autowired
     private ServerConfig serverConfig;
 
-    @RequiresPermissions("system:user:view")
+    @RequiresPermissions("system:pet:view")
     @GetMapping()
     public String user() {
         return prefix + "/pet";
@@ -66,6 +66,7 @@ public class SysPetController extends BaseController {
      * 新增用户
      */
     @GetMapping("/add")
+    @RequiresPermissions("system:pet:add")
     public String add(ModelMap mmap) {
         return prefix + "/add";
     }
@@ -92,19 +93,50 @@ public class SysPetController extends BaseController {
         }
         return error();
     }
+
     @RequiresPermissions("system:pet:remove")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids){
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(petService.deletePetByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
+    }
+
+    /**
+     * 修改角色
+     */
+    @GetMapping("/edit/{petId}")
+    public String edit(@PathVariable("petId") String petId, ModelMap mmap) {
+        mmap.put("pet", petService.selectPetById(petId));
+        return prefix + "/edit";
+    }
+
+    @RequiresPermissions("system:pet:edit")
+    @Log(title = "宠物管理", businessType = BusinessType.INSERT)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(@RequestParam("file") MultipartFile file, @Validated SysPet sysPet) throws IOException {
+        // 上传文件路径
+        String filePath = Global.getUploadPath();
+        // 上传并返回新文件名称
+        String fileName = FileUploadUtils.upload(filePath, file);
+        String url = serverConfig.getUrl() + fileName;
+        sysPet.setCreateBy(ShiroUtils.getLoginName());
+        sysPet.setCreateTime(new Date());
+        sysPet.setAdoptStatu(0);
+        sysPet.setImageUrl(url);
+        sysPet.setDel_flag(0);
+        sysPet.setUpdateBy(ShiroUtils.getLoginName());
+        sysPet.setUpdateTime(new Date());
+        int result = petService.editPet(sysPet);
+        if (result > 0) {
+            return success();
+        }
+        return error();
     }
 
 }

@@ -42,11 +42,17 @@ public interface SysPetMapper {
             "VALUES(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.adoptStatu},#{p.fostStatu},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag})")
     int savePet(@Param("p") SysPet sysPet);
 
-@Update("<script>" +
-        "update sys_pet set del_flag = '2' where id in" +
+    @Update("<script>" +
+            "update sys_pet set del_flag = '2' where id in" +
             "<foreach collection=\"ids\" item=\"id\" open=\"(\" separator=\",\" close=\")\">" +
             "#{id}" +
             "</foreach> " +
-        "</script>")
+            "</script>")
     int deletePetByIds(@Param("ids") String[] ids);
+
+    @Select("SELECT * FROM sys_pet WHERE id = #{id}")
+    SysPet selectPetById(String id);
+
+    @Update("UPDATE sys_pet SET  name=#{p.name},type=#{p.type}, adoptStatu=#{p.adoptStatu},fostStatu=#{p.fostStatu},sex=#{p.sex},imageUrl=#{p.imageUrl},updateBy=#{p.updateBy},update_time=#{p.updateTime},remark=#{p.remark} WHERE id=#{p.id} ")
+    int editPet(@Param("p") SysPet sysPet);
 }

@@ -20,4 +20,8 @@ public interface ISysPetService {
     int savePet(SysPet sysPet);
 
     int deletePetByIds(String ids);
+
+    SysPet selectPetById(String petId);
+
+    int editPet(SysPet sysPet);
 }

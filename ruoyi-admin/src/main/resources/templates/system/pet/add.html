@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('新增角色')" />
+	<th:block th:include="include :: header('新增宠物')" />
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -21,18 +21,16 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label">性别：</label>
 			<div class="col-sm-8">
-				<select class="form-control" name="sex" id="sex">
-					<option value=1>雄性</option>
-					<option value=0>雌性</option>
+				<select id="sex" name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_pet_sex')}">
+					<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">寄养状态：</label>
 			<div class="col-sm-8">
-				<select class="form-control" id="fostStatu" name="fostStatu">
-					<option value=1>这不是寄养的宠物</option>
-					<option value=0>这是寄养的宠物</option>
+				<select class="form-control m-b" id="fostStatu" name="fostStatu" th:with="type=${@dict.getType('sys_pet_foststatu')}">
+					<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 				</select>
 			</div>
 		</div>
@@ -43,7 +41,17 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<input id="filePath" name="filePath" class="form-control" type="file">
+			<label class="col-sm-3 control-label">宠物照片：</label>
+			<input id="filePath" name="filePath" class="form-control" type="file" style="padding: 3px 6px;
+                padding-left: 10px;
+                border: 1px solid #E7EAEC;
+                width: 230px;
+                height: 25px;
+                line-height: 25px;
+                border-left: 3px solid #3FB7EB;
+                background: #FAFAFB;
+                border-radius: 2px;
+                 border: 0px;" >
 		</div>
 	</form>
 </div>
