@@ -15,18 +15,38 @@ import java.util.List;
  */
 @Mapper
 public interface SysPetMapper {
-    @Select("SELECT * FROM sys_pet")
-    @Results(id = "SysPet",
+    @Select({"<script> " +
+            "SELECT * FROM sys_pet  where del_flag = '0'" +
+            "<if test=\"name != null and name != ''\">" +
+            "AND name=#{name}</if>" +
+            "<if test=\"adoptStatu != null and adoptStatu != ''\"> AND adoptStatu=#{adoptStatu}</if> " +
+            "<if test=\"type != null and type != ''\"> AND type=#{type}</if>" +
+            "<if test=\"params.beginTime != null and params.beginTime != ''\">" +
+            "AND date_format(createTime,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')</if>" +
+            "<if test=\"params.endTime != null and params.endTime != ''\">" +
+            "AND date_format(createTime,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')</if>" +
+            "</script>"})
+//    @Select("SELECT * FROM sys_pet where sysPet.del_flag = '0'")
+    @Results(id = "SysPetResult",
             value = {
-                 @Result(property = "createTime",column = "create_time"),
-                 @Result(property = "updateTime",column = "update_time"),
-
+                    @Result(property = "createTime", column = "create_time"),
+                    @Result(property = "updateTime", column = "update_time"),
             })
     List<SysPet> selectPetList(SysPet sysPet);
+
     @Select("SELECT  ImageUrl  FROM sys_pet WHERE id=#{id}")
     String findImageUrl(String id);
-@Insert("INSERT INTO" +
-        "  sys_pet  " +
-        "VALUES(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.adoptStatu},#{p.fostStatu},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag})")
+
+    @Insert("INSERT INTO" +
+            "  sys_pet  " +
+            "VALUES(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.adoptStatu},#{p.fostStatu},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag})")
     int savePet(@Param("p") SysPet sysPet);
+
+@Update("<script>" +
+        "update sys_pet set del_flag = '2' where id in" +
+            "<foreach collection=\"ids\" item=\"id\" open=\"(\" separator=\",\" close=\")\">" +
+            "#{id}" +
+            "</foreach> " +
+        "</script>")
+    int deletePetByIds(@Param("ids") String[] ids);
 }

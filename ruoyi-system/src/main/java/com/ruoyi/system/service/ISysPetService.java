@@ -18,4 +18,6 @@ public interface ISysPetService {
     String  findImageUrl(String id);
 
     int savePet(SysPet sysPet);
+
+    int deletePetByIds(String ids);
 }

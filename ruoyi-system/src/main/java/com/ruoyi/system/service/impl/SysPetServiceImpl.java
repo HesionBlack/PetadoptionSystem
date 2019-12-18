@@ -8,6 +8,7 @@ package com.ruoyi.system.service.impl;/**
  * @since JDK 1.8
  */
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.system.domain.SysPet;
 import com.ruoyi.system.mapper.SysPetMapper;
 import com.ruoyi.system.service.ISysPetService;
@@ -36,6 +37,7 @@ public class SysPetServiceImpl implements ISysPetService {
     }
 
     @Override
+
     public String findImageUrl(String id) {
         return sysPetMapper.findImageUrl(id);
     }
@@ -43,5 +45,11 @@ public class SysPetServiceImpl implements ISysPetService {
     @Override
     public int savePet(SysPet sysPet) {
         return sysPetMapper.savePet(sysPet);
+    }
+
+    @Override
+    public int deletePetByIds(String ids) {
+        String[] id = ids.split(",");
+        return sysPetMapper.deletePetByIds(id);
     }
 }

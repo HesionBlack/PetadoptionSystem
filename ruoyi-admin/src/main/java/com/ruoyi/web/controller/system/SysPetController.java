@@ -82,14 +82,29 @@ public class SysPetController extends BaseController {
         String url = serverConfig.getUrl() + fileName;
         sysPet.setCreateBy(ShiroUtils.getLoginName());
         sysPet.setCreateTime(new Date());
+        sysPet.setAdoptStatu(0);
         sysPet.setImageUrl(url);
         sysPet.setDel_flag(0);
+
         int result = petService.savePet(sysPet);
         if (result > 0) {
             return success();
         }
         return error();
     }
-
+    @RequiresPermissions("system:pet:remove")
+    @Log(title = "宠物管理", businessType = BusinessType.INSERT)
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids){
+        try
+        {
+            return toAjax(petService.deletePetByIds(ids));
+        }
+        catch (Exception e)
+        {
+            return error(e.getMessage());
+        }
+    }
 
 }

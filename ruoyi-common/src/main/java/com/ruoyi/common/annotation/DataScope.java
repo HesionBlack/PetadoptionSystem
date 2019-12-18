@@ -25,4 +25,5 @@ public @interface DataScope
      * 用户表的别名
      */
     public String userAlias() default "";
+    public String petAlias() default "";
 }
