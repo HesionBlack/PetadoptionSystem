@@ -18,9 +18,9 @@ public interface SysPetMapper {
     @Select({"<script> " +
             "SELECT * FROM sys_pet  where del_flag = '0'" +
             "<if test=\"name != null and name != ''\">" +
-            "AND name=#{name}</if>" +
+            "AND name LIKE \'%${name}%\'</if>" +
             "<if test=\"adoptStatu != null and adoptStatu != ''\"> AND adoptStatu=#{adoptStatu}</if> " +
-            "<if test=\"type != null and type != ''\"> AND type=#{type}</if>" +
+            "<if test=\"type != null and type != ''\"> AND type LIKE \'%${type}%\'</if>" +
             "<if test=\"params.beginTime != null and params.beginTime != ''\">" +
             "AND date_format(createTime,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')</if>" +
             "<if test=\"params.endTime != null and params.endTime != ''\">" +

@@ -15,5 +15,5 @@ import java.util.List;
 public interface IUserPetService {
     List<SysPet> selectPetList(SysPet sysPet);
 
-    int applyAdopt(String id, Long userId);
+    int applyAdopt(String id, Long userId,String remark);
 }

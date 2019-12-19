@@ -13,17 +13,15 @@ import lombok.Data;
 
 /**
  * @program: ruoyi
- *
  * @description:
- *
  * @author: hesion
- *
  * @create: 2019-12-18 16:56
  **/
 @Data
 public class PetApply extends BaseEntity {
     private String id;
     private Long uId;
-    private  String pId;
-private int confirm;
+    private String pId;
+    private int confirm;
+    private String del_flag;
 }

@@ -19,9 +19,6 @@
                             <li>
                                 宠物类型：<input type="text" name="type"/>
                             </li>
-                            <li>
-                                领养状态：<input type="text" name="status"/>
-                            </li>
                             <li class="select-time">
                                 <label>创建时间： </label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间"
@@ -68,6 +65,7 @@
             sortName: "createTime",
             sortOrder: "desc",
             modalName: "宠物",
+            applyurl:prefix+'/applyAdopt/{id}',
             columns: [{
                 checkbox: true,
             },
@@ -128,20 +126,8 @@
     }
 
     function applyAdopt(id) {
-        $.ajax({
-            processData: false,
-            contentType: false,
-            cache : false,
-            type : "POST",
-            url : ctx + "user/pet/applyAdopt/"+id,
-            async : false,
-            error : function(request) {
-                $.modal.alertError("系统错误");
-            },
-            success : function(data) {
-                $.operate.successCallback(data);
-            }
-        });
+        var url = table.options.applyurl.replace("{id}", id);
+          $.modal.open("申请理由",url);
     }
 
 </script>

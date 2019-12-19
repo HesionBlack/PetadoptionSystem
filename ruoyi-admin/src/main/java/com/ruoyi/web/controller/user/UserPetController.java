@@ -17,6 +17,7 @@ import com.ruoyi.system.service.IUserPetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,13 +51,19 @@ public class UserPetController extends BaseController {
         List<SysPet> list = userPetService.selectPetList(sysPet);
         return getDataTable(list);
     }
+@GetMapping("/applyAdopt/{id}")
+public String applyPage(@PathVariable String id, ModelMap mmap){
+          mmap.put("petid",id);
+          return prefix+"/applyPage";
+}
 
-    @GetMapping("/applyAdopt")
+
+    @PostMapping("/applyAdopt/{id}")
     @ResponseBody
-    public AjaxResult applyAdopt(String id) {
+    public AjaxResult applyAdopt(@PathVariable  String id, String remark) {
         Long userId = ShiroUtils.getUserId();
         try {
-            return toAjax(userPetService.applyAdopt(id,userId));
+            return toAjax(userPetService.applyAdopt(id,userId,remark));
         } catch (Exception e) {
             return error(e.getMessage());
         }

@@ -1,9 +1,8 @@
 package com.ruoyi.system.mapper;
 
+import com.ruoyi.system.domain.PetApply;
 import com.ruoyi.system.domain.SysPet;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,11 +16,11 @@ import java.util.List;
  */
 public interface UserPetMapper {
     @Select({"<script> " +
-            "SELECT * FROM sys_pet  where del_flag = '0' AND fostStatu=0" +
+            "SELECT * FROM sys_pet  where del_flag = '0'" +
             "<if test=\"name != null and name != ''\">" +
-            "AND name=#{name}</if>" +
+            "AND name LIKE \'%${name}%\'</if>" +
             "<if test=\"adoptStatu != null and adoptStatu != ''\"> AND adoptStatu=#{adoptStatu}</if> " +
-            "<if test=\"type != null and type != ''\"> AND type=#{type}</if>" +
+            "<if test=\"type != null and type != ''\"> AND type LIKE \'%${type}%\'</if>" +
             "<if test=\"params.beginTime != null and params.beginTime != ''\">" +
             "AND date_format(createTime,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')</if>" +
             "<if test=\"params.endTime != null and params.endTime != ''\">" +
@@ -34,5 +33,6 @@ public interface UserPetMapper {
             })
     List<SysPet> selectPetList(SysPet sysPet);
 
-    int applyAdopt(String id, Long userId);
+    @Insert("INSERT INTO user_pet_apply VALUE(REPLACE(UUID(),\"-\",\"\"),#{a.uId},#{a.pId},#{a.confirm},#{a.createTime},#{a.updateTime},#{a.updateBy},#{a.del_flag},#{a.remark})")
+    int applyAdopt(@Param("a") PetApply petApply);
 }
