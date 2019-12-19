@@ -1,5 +1,9 @@
 package com.ruoyi.system.service;
 
+import com.ruoyi.system.domain.SysPet;
+
+import java.util.List;
+
 /**
  * ClassName: IUserPetService <br/>
  * Description: <br/>
@@ -9,4 +13,7 @@ package com.ruoyi.system.service;
  * @since JDK 1.8
  */
 public interface IUserPetService {
+    List<SysPet> selectPetList(SysPet sysPet);
+
+    int applyAdopt(String id, Long userId);
 }

@@ -8,6 +8,9 @@ package com.ruoyi.system.domain;/**
  * @since JDK 1.8
  */
 
+import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
+
 /**
  * @program: ruoyi
  *
@@ -17,5 +20,10 @@ package com.ruoyi.system.domain;/**
  *
  * @create: 2019-12-18 16:56
  **/
-public class PetApply {
+@Data
+public class PetApply extends BaseEntity {
+    private String id;
+    private Long uId;
+    private  String pId;
+private int confirm;
 }

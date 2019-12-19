@@ -8,8 +8,18 @@ package com.ruoyi.web.controller.user;/**
  * @since JDK 1.8
  */
 
+import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.service.IUserPetService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @program: ruoyi
@@ -21,7 +31,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create: 2019-12-18 14:08
  **/
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/user/pet")
+public class UserPetController extends BaseController {
+      String prefix="user/pet";
+    @Autowired
+    private IUserPetService userPetService;
+      @RequiresPermissions("user:pet:view")
+      @GetMapping("/petInfo")
+      public String petInfo() {
+          return prefix + "/petInfo";
+      }
 
+    @RequiresPermissions("user:pet:view")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(SysPet sysPet) {
+        startPage();
+        List<SysPet> list = userPetService.selectPetList(sysPet);
+        return getDataTable(list);
+    }
+
+    @GetMapping("/applyAdopt")
+    @ResponseBody
+    public AjaxResult applyAdopt(String id) {
+        Long userId = ShiroUtils.getUserId();
+        try {
+            return toAjax(userPetService.applyAdopt(id,userId));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
 }
