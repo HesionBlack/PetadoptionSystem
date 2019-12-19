@@ -35,4 +35,11 @@ public interface UserPetMapper {
 
     @Insert("INSERT INTO user_pet_apply VALUE(REPLACE(UUID(),\"-\",\"\"),#{a.uId},#{a.pId},#{a.confirm},#{a.createTime},#{a.updateTime},#{a.updateBy},#{a.del_flag},#{a.remark})")
     int applyAdopt(@Param("a") PetApply petApply);
+
+
+    @Update("UPDATE user_pet_apply SET  update_time = #{a.updateTime},updateBy=#{a.updateBy}, confirm=#{a.confirm} WHERE pId=#{a.pId}")
+    int agreeAdopt(@Param("a") PetApply petApply);
+
+    @Update("UPDATE sys_pet SET  update_time = #{a.updateTime},updateBy=#{a.updateBy}, adoptStatu=#{a.confirm} WHERE id=#{a.pId} ")
+    int setPetAdoptStatus(@Param("a") PetApply petApply);
 }

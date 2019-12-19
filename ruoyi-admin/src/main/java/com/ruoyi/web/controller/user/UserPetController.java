@@ -68,4 +68,15 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
             return error(e.getMessage());
         }
     }
+
+    @GetMapping("/agreeAdopt/{pId}")
+    @ResponseBody
+    public AjaxResult agreeAdopt(@PathVariable String pId){
+        String loginName = ShiroUtils.getLoginName();
+        try {
+            return toAjax(userPetService.agreeAdopt(pId,loginName));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
 }

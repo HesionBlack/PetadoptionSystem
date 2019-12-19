@@ -37,14 +37,30 @@ public class UserPetServiceImpl implements IUserPetService {
     }
 
     @Override
-    public int applyAdopt(String id, Long userId,String remark) {
+    public int applyAdopt(String pid, Long userId,String remark) {
         PetApply petApply = new PetApply();
         petApply.setUId(userId);
-        petApply.setPId(id);
+        petApply.setPId(pid);
         petApply.setConfirm(0);
         petApply.setCreateTime(new Date());
         petApply.setDel_flag("0");
         petApply.setRemark(remark);
         return userPetMapper.applyAdopt(petApply);
+    }
+
+    @Override
+    public int agreeAdopt(String pId, String loginName) {
+        PetApply petApply = new PetApply();
+        petApply.setConfirm(1);
+        petApply.setUpdateBy(loginName);
+        petApply.setUpdateTime(new Date());
+        petApply.setPId(pId);
+        int result = userPetMapper.agreeAdopt(petApply);
+        if(result > 0){
+            userPetMapper.setPetAdoptStatus(petApply);
+            return result;
+        }else{
+           return 0;
+        }
     }
 }

@@ -16,4 +16,6 @@ public interface IUserPetService {
     List<SysPet> selectPetList(SysPet sysPet);
 
     int applyAdopt(String id, Long userId,String remark);
+
+    int agreeAdopt(String pId, String loginName);
 }
