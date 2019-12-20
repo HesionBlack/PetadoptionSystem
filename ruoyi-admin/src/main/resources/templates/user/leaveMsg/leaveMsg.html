@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('给驿站留言')"/>
+    <th:block th:include="include :: layout-latest-css"/>
+    <th:block th:include="include :: ztree-css"/>
+</head>
+<body class="gray-bg">
+<div class="ui-layout-center">
+    <div class="container-div">
+        <div class="row">
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="leaveMsg()">
+                    <i class="fa fa-plus"></i> 留言
+                </a>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: layout-latest-js"/>
+<th:block th:include="include :: ztree-js"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:pet:remove')}]];
+    var prefix = ctx + "user/leaveMsg";
+
+    $(function () {
+        var panehHidden = false;
+        if ($(this).width() < 769) {
+            panehHidden = true;
+        }
+        $('body').layout({initClosed: panehHidden, west__size: 185});
+        queryUserList();
+    });
+
+    function queryUserList() {
+        var options = {
+            url: prefix + "/list",
+            sortName: "createTime",
+            sortOrder: "desc",
+            modalName: "留言",
+            columns: [{
+                checkbox: true,
+            },
+                // {
+                //     field: 'id',
+                //     title: '宠物id',
+                // },
+                {
+                    field: 'msg',
+                    title: '留言内容',
+                },
+                {
+                    field: 'createTime',
+                    title: '留言时间'
+                },
+                {
+                    field: 'createBy',
+                    title: '留言名称'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.showReply(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    }
+
+    function leaveMsg() {
+        $.modal.open("给驿站留言", prefix+'/leave')
+    }
+
+</script>
+</body>
+</html>

@@ -15,7 +15,6 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.PetApply;
 import com.ruoyi.system.domain.PetApplyView;
 import com.ruoyi.system.domain.PetFostApply;
 import com.ruoyi.system.domain.SysPet;
@@ -32,26 +31,24 @@ import java.util.List;
 
 /**
  * @program: ruoyi
- *
  * @description:
- *
  * @author: hesion
- *
  * @create: 2019-12-18 14:08
  **/
 @Controller
 @RequestMapping("/user/pet")
 public class UserPetController extends BaseController {
-      String prefix="user/pet";
+    String prefix = "user/pet";
     @Autowired
     private IUserPetService userPetService;
     @Autowired
     private ServerConfig serverConfig;
-      @RequiresPermissions("user:pet:view")
-      @GetMapping("/petInfo")
-      public String petInfo() {
-          return prefix + "/petInfo";
-      }
+
+    @RequiresPermissions("user:pet:view")
+    @GetMapping("/petInfo")
+    public String petInfo() {
+        return prefix + "/petInfo";
+    }
 
     @RequiresPermissions("user:pet:view")
     @PostMapping("/list")
@@ -61,19 +58,20 @@ public class UserPetController extends BaseController {
         List<SysPet> list = userPetService.selectPetList(sysPet);
         return getDataTable(list);
     }
-@GetMapping("/applyAdopt/{id}")
-public String applyPage(@PathVariable String id, ModelMap mmap){
-          mmap.put("petid",id);
-          return prefix+"/applyPage";
-}
+
+    @GetMapping("/applyAdopt/{id}")
+    public String applyPage(@PathVariable String id, ModelMap mmap) {
+        mmap.put("petid", id);
+        return prefix + "/applyPage";
+    }
 
 
     @PostMapping("/applyAdopt/{id}")
     @ResponseBody
-    public AjaxResult applyAdopt(@PathVariable  String id, String remark) {
+    public AjaxResult applyAdopt(@PathVariable String id, String remark) {
         Long userId = ShiroUtils.getUserId();
         try {
-            return toAjax(userPetService.applyAdopt(id,userId,remark));
+            return toAjax(userPetService.applyAdopt(id, userId, remark));
         } catch (Exception e) {
             return error(e.getMessage());
         }
@@ -81,20 +79,21 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
 
     @GetMapping("/agreeAdopt/{pId}")
     @ResponseBody
-    public AjaxResult agreeAdopt(@PathVariable String pId){
+    public AjaxResult agreeAdopt(@PathVariable String pId) {
         String loginName = ShiroUtils.getLoginName();
         try {
-            return toAjax(userPetService.agreeAdopt(pId,loginName));
+            return toAjax(userPetService.agreeAdopt(pId, loginName));
         } catch (Exception e) {
             return error(e.getMessage());
         }
     }
+
     @GetMapping("/agreeFost/{id}")
     @ResponseBody
-    public AjaxResult agreeFost(@PathVariable String id){
+    public AjaxResult agreeFost(@PathVariable String id) {
         String loginName = ShiroUtils.getLoginName();
         try {
-            return toAjax(userPetService.agreeFost(id,loginName));
+            return toAjax(userPetService.agreeFost(id, loginName));
         } catch (Exception e) {
             return error(e.getMessage());
         }
@@ -102,8 +101,8 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
 
 
     @GetMapping("/myapply")
-    public String myapply(ModelMap mmap){
-        return prefix+"/myapply";
+    public String myapply(ModelMap mmap) {
+        return prefix + "/myapply";
     }
 
     @PostMapping("/myapply")
@@ -113,10 +112,11 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
         List<PetApplyView> myapply = userPetService.myapply(userId);
         return getDataTable(myapply);
     }
-@RequiresPermissions("user:pet:fost")
+
+    @RequiresPermissions("user:pet:fost")
     @GetMapping("/applyfost")
-    public String applyFost(){
-          return prefix+"/applyfost";
+    public String applyFost() {
+        return prefix + "/applyfost";
     }
 
     @PostMapping("/applyfost")
@@ -139,8 +139,8 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
     }
 
     @GetMapping("/myFostapply")
-    public String myFostapply(ModelMap mmap){
-        return prefix+"/myFostapply";
+    public String myFostapply(ModelMap mmap) {
+        return prefix + "/myFostapply";
     }
 
     @PostMapping("/myFostapply")
