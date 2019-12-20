@@ -46,7 +46,7 @@ public interface UserPetMapper {
     List<PetApplyView> myapply(Long userId);
     @Insert("INSERT INTO" +
             "  user_pet_applyfost  " +
-            "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{useId})")
+            "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{p.uId})")
     int fostapply(@Param("p") PetFostApply petFostApply);
 
     @Select("SELECT * FROM v_pet_applyfost WHERE uId=#{userId} ")
