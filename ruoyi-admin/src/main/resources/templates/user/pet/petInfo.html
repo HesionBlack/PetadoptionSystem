@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="include :: header('宠物列表')"/>
     <th:block th:include="include :: layout-latest-css"/>
@@ -37,6 +37,14 @@
                     </div>
                 </form>
             </div>
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.myapply()">
+                    <i class="fa fa-eercast"></i> 我的领养申请
+                </a>
+                <a class="btn btn-success" onclick="$.operate.myFostapply()">
+                    <i class="fa fa-eercast"></i> 我的寄养申请
+                </a>
+            </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
             </div>
@@ -65,7 +73,7 @@
             sortName: "createTime",
             sortOrder: "desc",
             modalName: "宠物",
-            applyurl:prefix+'/applyAdopt/{id}',
+            applyurl: prefix + '/applyAdopt/{id}',
             columns: [{
                 checkbox: true,
             },
@@ -85,9 +93,9 @@
                     field: 'sex',
                     title: '性别',
                     formatter: function (value, item, index) {
-                        if(item.sex===1){
+                        if (item.sex === 1) {
                             return '雄性';
-                        }else {
+                        } else {
                             return '雌性';
                         }
                     }
@@ -96,9 +104,9 @@
                     field: 'adoptStatu',
                     title: '领养状态',
                     formatter: function (value, item, index) {
-                        if(item.adoptStatu===0){
+                        if (item.adoptStatu === 0) {
                             return '未领养';
-                        }else {
+                        } else {
                             return '已领养';
                         }
                     }
@@ -116,8 +124,10 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-info btn-xs '  + '" href="javascript:void(0)" onclick="$.operate.showImage(\'' + row.id + '\')"><i class="fa fa-key"></i>萌图</a>');
-                        actions.push('<a class="btn btn-success btn-xs '  + '" href="javascript:void(0)" onclick="applyAdopt(\'' + row.id + '\')"><i class="fa fa-key"></i>申请领养</a>');
+                        actions.push('<a class="btn btn-info btn-xs ' + '" href="javascript:void(0)" onclick="$.operate.showImage(\'' + row.id + '\')"><i class="fa fa-key"></i>萌图</a>');
+                        if (row.adoptStatu === 0) {
+                            actions.push('<a class="btn btn-success btn-xs ' + '" href="javascript:void(0)" onclick="applyAdopt(\'' + row.id + '\')"><i class="fa fa-key"></i>申请领养</a>');
+                        }
                         return actions.join('');
                     }
                 }]
@@ -127,7 +137,7 @@
 
     function applyAdopt(id) {
         var url = table.options.applyurl.replace("{id}", id);
-          $.modal.open("申请理由",url);
+        $.modal.open("申请理由", url);
     }
 
 </script>

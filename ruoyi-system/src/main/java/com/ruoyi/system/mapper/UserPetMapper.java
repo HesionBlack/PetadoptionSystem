@@ -1,7 +1,6 @@
 package com.ruoyi.system.mapper;
 
-import com.ruoyi.system.domain.PetApply;
-import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -42,4 +41,14 @@ public interface UserPetMapper {
 
     @Update("UPDATE sys_pet SET  update_time = #{a.updateTime},updateBy=#{a.updateBy}, adoptStatu=#{a.confirm} WHERE id=#{a.pId} ")
     int setPetAdoptStatus(@Param("a") PetApply petApply);
+
+    @Select("SELECT * FROM v_pet_myapplyview WHERE uId=#{userId} ")
+    List<PetApplyView> myapply(Long userId);
+    @Insert("INSERT INTO" +
+            "  user_pet_applyfost  " +
+            "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{useId})")
+    int fostapply(@Param("p") PetFostApply petFostApply);
+
+    @Select("SELECT * FROM v_pet_applyfost WHERE uId=#{userId} ")
+    List<PetApplyView> myFostapplyPost(Long userId);
 }

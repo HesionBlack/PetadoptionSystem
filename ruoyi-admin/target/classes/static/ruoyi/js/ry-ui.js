@@ -1156,8 +1156,14 @@ var table = {
             },
 			showImage: function (id) {
 				   $.modal.open("图片预览","/system/pet/showImage/"+id);
-			}
-		},
+			},
+            myapply: function () {
+				$.modal.open("我的领养申请","/user/pet/myapply");
+            },
+            myFostapply: function () {
+				$.modal.open("我的寄养申请","/user/pet/myFostapply");
+            }
+        },
         // 校验封装处理
         validate: {
         	// 判断返回标识是否唯一 false 不存在 true 存在

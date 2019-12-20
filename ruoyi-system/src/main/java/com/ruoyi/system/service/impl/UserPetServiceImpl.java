@@ -8,8 +8,7 @@ package com.ruoyi.system.service.impl;/**
  * @since JDK 1.8
  */
 
-import com.ruoyi.system.domain.PetApply;
-import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.*;
 import com.ruoyi.system.mapper.UserPetMapper;
 import com.ruoyi.system.service.IUserPetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +61,23 @@ public class UserPetServiceImpl implements IUserPetService {
         }else{
            return 0;
         }
+    }
+
+    @Override
+    public List<PetApplyView> myapply(Long userId) {
+        return userPetMapper.myapply(userId);
+    }
+
+    @Override
+    public int fostapply(PetFostApply petFostApply) {
+        petFostApply.setCreateTime(new Date());
+        petFostApply.setDel_flag(0);
+        petFostApply.setConfirm(0);
+        return userPetMapper.fostapply(petFostApply) ;
+    }
+
+    @Override
+    public List<PetApplyView> myFostapplyPost(Long userId) {
+        return userPetMapper.myFostapplyPost(userId);
     }
 }

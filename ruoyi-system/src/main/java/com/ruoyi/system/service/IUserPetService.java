@@ -1,6 +1,6 @@
 package com.ruoyi.system.service;
 
-import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.*;
 
 import java.util.List;
 
@@ -18,4 +18,10 @@ public interface IUserPetService {
     int applyAdopt(String id, Long userId,String remark);
 
     int agreeAdopt(String pId, String loginName);
+
+    List<PetApplyView> myapply(Long userId);
+
+    int fostapply(PetFostApply petFostApply);
+
+    List<PetApplyView> myFostapplyPost(Long userId);
 }
