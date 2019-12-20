@@ -65,6 +65,17 @@
                     title: '留言名称'
                 },
                 {
+                    field: 'replyStatu',
+                    title: '回复状态',
+                    formatter: function (value, item, index) {
+                        if(item.replyStatu === 1){
+                            return '有回复';
+                        }else {
+                            return '暂未回复';
+                        }
+                    }
+                },
+                {
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
