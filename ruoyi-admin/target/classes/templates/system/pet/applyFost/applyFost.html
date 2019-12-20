@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('宠物列表')"/>
+    <th:block th:include="include :: layout-latest-css"/>
+    <th:block th:include="include :: ztree-css"/>
+</head>
+<body class="gray-bg">
+<div class="ui-layout-center">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="user-form">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                宠物名称：<input type="text" name="name"/>
+                            </li>
+                            <li>
+                                宠物类型：<input type="text" name="type"/>
+                             </li>
+                            <li class="select-time">
+                                <label>创建时间： </label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间"
+                                       name="params[beginTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间"
+                                       name="params[endTime]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                        class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                        class="fa fa-refresh"></i>重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+<!--            <div class="btn-group-sm" id="toolbar" role="group">-->
+<!--                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:role:add">-->
+<!--                    <i class="fa fa-plus"></i> 新增-->
+<!--                </a>-->
+<!--                <a class="btn btn-info multiple disabled" onclick="$.operate.showMaster()"-->
+<!--                   shiro:hasPermission="system:pet:list">-->
+<!--                    <i class="fa fa-key"></i> 查看主人-->
+<!--                </a>-->
+<!--            </div>-->
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: layout-latest-js"/>
+<th:block th:include="include :: ztree-js"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:pet:remove')}]];
+    var prefix = ctx + "system/applyFost";
+
+    $(function () {
+        var panehHidden = false;
+        if ($(this).width() < 769) {
+            panehHidden = true;
+        }
+        $('body').layout({initClosed: panehHidden, west__size: 185});
+        queryUserList();
+    });
+
+    function queryUserList() {
+        var options = {
+            url: prefix + "/list",
+            removeUrl: prefix + "/remove",
+            sortName: "createTime",
+            sortOrder: "desc",
+            modalName: "宠物领养处理",
+            columns: [{
+                checkbox: true,
+            },
+                // {
+                //     field: 'id',
+                //     title: '宠物id',
+                // },
+                {
+                    field: 'name',
+                    title: '宠物名称',
+                },
+                {
+                    field: 'type',
+                    title: '宠物类型'
+                },
+                {
+                    field: 'sex',
+                    title: '性别',
+                    formatter: function (value, item, index) {
+                        if(item.sex===1){
+                            return '雄性';
+                        }else {
+                            return '雌性';
+                        }
+                    }
+                },
+                {
+                    field: 'petremark',
+                    title: '宠物备注'
+                },
+                {
+                    field: 'applyName',
+                    title: '申请人'
+                },
+                {
+                    field: 'applyremark',
+                    title: '申请理由'
+                },
+                {
+                    field: 'confirm',
+                    title: '状态',
+                    formatter: function (value, item, index) {
+                        if(item.confirm===1){
+                            return '已同意';
+                        }else {
+                            return '待处理';
+                        }
+                    }
+                },
+				{
+                    field: 'createTime',
+                    title: '申请时间',
+                    sortable: true
+                },
+				{
+                    field: 'updateBy',
+                    title: '处理人'
+                },
+				{
+                    field: 'updateTime',
+                    title: '处理时间',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        if(row.confirm === 0){
+                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="agreeApply(\'' + row.id +'\')"><i class="fa fa-edit"></i>同意寄养</a> ');
+                        }
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    }
+    function agreeApply(row){
+        $.ajax({
+
+            cache: false,
+            type: "Get",
+            url: ctx + "user/pet/agreeFost/" + row,
+            async: false,
+            error: function (request) {
+                $.modal.alertError("系统错误");
+            },
+            success: function (data) {
+                $.operate.successCallback(data);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

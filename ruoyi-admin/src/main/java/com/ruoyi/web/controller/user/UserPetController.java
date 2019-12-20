@@ -89,6 +89,17 @@ public String applyPage(@PathVariable String id, ModelMap mmap){
             return error(e.getMessage());
         }
     }
+    @GetMapping("/agreeFost/{id}")
+    @ResponseBody
+    public AjaxResult agreeFost(@PathVariable String id){
+        String loginName = ShiroUtils.getLoginName();
+        try {
+            return toAjax(userPetService.agreeFost(id,loginName));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
+
 
     @GetMapping("/myapply")
     public String myapply(ModelMap mmap){

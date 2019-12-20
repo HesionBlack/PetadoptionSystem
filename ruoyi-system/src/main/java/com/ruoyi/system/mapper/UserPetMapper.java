@@ -1,6 +1,9 @@
 package com.ruoyi.system.mapper;
 
-import com.ruoyi.system.domain.*;
+import com.ruoyi.system.domain.PetApply;
+import com.ruoyi.system.domain.PetApplyView;
+import com.ruoyi.system.domain.PetFostApply;
+import com.ruoyi.system.domain.SysPet;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -44,11 +47,23 @@ public interface UserPetMapper {
 
     @Select("SELECT * FROM v_pet_myapplyview WHERE uId=#{userId} ")
     List<PetApplyView> myapply(Long userId);
+
     @Insert("INSERT INTO" +
             "  user_pet_applyfost  " +
             "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{p.uId})")
     int fostapply(@Param("p") PetFostApply petFostApply);
 
-    @Select("SELECT * FROM v_pet_applyfost WHERE uId=#{userId} ")
+    @Select("SELECT * FROM v_pet_myapplyfostview WHERE uId=#{userId} ")
     List<PetApplyView> myFostapplyPost(Long userId);
+
+    @Update("UPDATE user_pet_applyfost SET  update_time = #{a.updateTime},updateBy=#{a.updateBy}, confirm=#{a.confirm} WHERE id=#{a.id}")
+    int agreeFost(@Param("a") PetFostApply petFostApply);
+
+    @Select("SELECT * FROM user_pet_applyfost  WHERE id=#{id}")
+    @Results(id = "SysFostResultById",
+            value = {
+                    @Result(property = "createTime", column = "create_time"),
+                    @Result(property = "updateTime", column = "update_time"),
+            })
+    PetFostApply getFostPetById(String id);
 }

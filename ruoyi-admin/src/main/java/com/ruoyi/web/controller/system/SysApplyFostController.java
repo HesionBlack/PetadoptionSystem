@@ -1,7 +1,7 @@
 package com.ruoyi.web.controller.system;/**
- * ClassName: SysApplyAdoptController <br/>
+ * ClassName: SysApplyFostController <br/>
  * Description: <br/>
- * date: 2019/12/19 上午11:01<br/>
+ * date: 2019/12/20 上午11:16<br/>
  *
  * @author Hesion<br />
  * @version
@@ -11,7 +11,8 @@ package com.ruoyi.web.controller.system;/**
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.system.domain.SysAdoptView;
-import com.ruoyi.system.service.IApplyAdoptService;
+import com.ruoyi.system.domain.SysFostView;
+import com.ruoyi.system.service.IApplyFostService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,28 +27,28 @@ import java.util.List;
  * @program: ruoyi
  * @description:
  * @author: hesion
- * @create: 2019-12-19 11:01
+ * @create: 2019-12-20 11:16
  **/
 @Controller
-@RequestMapping("/system/applyAdopt")
-public class SysApplyAdoptController extends BaseController {
-    String prefix = "system/pet/applyAdopt";
-
+@RequestMapping("/system/applyFost")
+public class SysApplyFostController extends BaseController {
+    String prefix = "system/pet/applyFost";
     @Autowired
-    IApplyAdoptService applyAdoptService;
+    IApplyFostService applyFostService;
 
     @RequiresPermissions("system:adopt:view")
     @GetMapping()
     public String user() {
-        return prefix + "/applyAdopt";
+        return prefix + "/applyFost";
     }
 
     @RequiresPermissions("system:adopt:view")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysAdoptView sysAdoptView) {
+    public TableDataInfo list(SysFostView sysFostView) {
         startPage();
-        List<SysAdoptView> list = applyAdoptService.selectAdpotList(sysAdoptView);
+        List<SysFostView> list = applyFostService.selectFostList(sysFostView);
         return getDataTable(list);
     }
+
 }

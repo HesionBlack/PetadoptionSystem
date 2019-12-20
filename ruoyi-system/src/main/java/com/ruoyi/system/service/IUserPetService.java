@@ -24,4 +24,7 @@ public interface IUserPetService {
     int fostapply(PetFostApply petFostApply);
 
     List<PetApplyView> myFostapplyPost(Long userId);
+
+    int agreeFost(String id, String loginName);
+
 }

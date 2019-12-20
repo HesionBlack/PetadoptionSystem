@@ -9,6 +9,7 @@ package com.ruoyi.system.service.impl;/**
  */
 
 import com.ruoyi.system.domain.*;
+import com.ruoyi.system.mapper.SysPetMapper;
 import com.ruoyi.system.mapper.UserPetMapper;
 import com.ruoyi.system.service.IUserPetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ import java.util.List;
 public class UserPetServiceImpl implements IUserPetService {
     @Autowired
     UserPetMapper userPetMapper;
+    @Autowired
+    SysPetMapper sysPetMapper;
     @Override
     public List<SysPet> selectPetList(SysPet sysPet) {
         return userPetMapper.selectPetList(sysPet);
@@ -79,5 +82,36 @@ public class UserPetServiceImpl implements IUserPetService {
     @Override
     public List<PetApplyView> myFostapplyPost(Long userId) {
         return userPetMapper.myFostapplyPost(userId);
+    }
+
+    @Override
+    public int agreeFost(String id, String loginName) {
+        PetFostApply petFostApply = new PetFostApply();
+        petFostApply.setConfirm(1);
+        petFostApply.setUpdateBy(loginName);
+        petFostApply.setUpdateTime(new Date());
+        petFostApply.setId(id);
+        int result = userPetMapper.agreeFost(petFostApply);
+        if(result > 0){
+            PetFostApply fostPet = userPetMapper.getFostPetById(id);
+            SysPet sysPet = new SysPet();
+            sysPet.setName(fostPet.getName());
+            sysPet.setType(fostPet.getType());
+            sysPet.setCreateTime(new Date());
+            sysPet.setAdoptStatu(0);
+            sysPet.setFostStatu(1);
+            sysPet.setSex(fostPet.getSex());
+            sysPet.setImageUrl(fostPet.getImageUrl());
+            sysPet.setCreateBy(fostPet.getUpdateBy());
+            sysPet.setUpdateBy(fostPet.getUpdateBy());
+            sysPet.setUpdateTime(petFostApply.getUpdateTime());
+            sysPet.setRemark(fostPet.getRemark());
+            sysPet.setDel_flag(0);
+            sysPetMapper.savePet(sysPet);
+//            userPetMapper.PetInfoRecord(sysPet);
+            return result;
+        }else{
+            return 0;
+        }
     }
 }
