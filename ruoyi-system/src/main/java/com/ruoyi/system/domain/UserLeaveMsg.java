@@ -28,5 +28,5 @@ public class UserLeaveMsg {
        private String msg;
        private Date createTime;
        private String createBy;
-       private Integer replyStatu;
+       private Integer replayStatu;
 }

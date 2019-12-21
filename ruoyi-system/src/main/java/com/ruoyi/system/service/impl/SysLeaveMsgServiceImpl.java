@@ -8,6 +8,7 @@ package com.ruoyi.system.service.impl;/**
  * @since JDK 1.8
  */
 
+import com.ruoyi.system.domain.SysLeaveMsgReply;
 import com.ruoyi.system.domain.SysPet;
 import com.ruoyi.system.domain.UserLeaveMsg;
 import com.ruoyi.system.mapper.SysLeaveMsgMapper;
@@ -15,6 +16,7 @@ import com.ruoyi.system.service.ISysLeaveMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,5 +35,25 @@ public class SysLeaveMsgServiceImpl implements ISysLeaveMsgService {
     @Override
     public List<UserLeaveMsg> selectLeaveMsgList(UserLeaveMsg userLeaveMsg) {
         return sysLeaveMsgMapper.selectLeaveMsgList(userLeaveMsg);
+    }
+
+    @Override
+    public UserLeaveMsg findMsgById(String id) {
+        return sysLeaveMsgMapper.findMsgById(id);
+    }
+
+    @Override
+    public int replyMsg(SysLeaveMsgReply sysLeaveMsgReply) {
+        return sysLeaveMsgMapper.replyMsg(sysLeaveMsgReply);
+    }
+
+    @Override
+    public int setReplyStatu(String id) {
+        return sysLeaveMsgMapper.setReplyStatu(id);
+    }
+
+    @Override
+    public List<SysLeaveMsgReply> findReplyById(String id) {
+        return sysLeaveMsgMapper.findReplyById(id);
     }
 }

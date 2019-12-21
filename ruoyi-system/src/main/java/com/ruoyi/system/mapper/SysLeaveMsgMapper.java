@@ -8,30 +8,40 @@ package com.ruoyi.system.mapper;/**
  * @since JDK 1.8
  */
 
-import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.SysLeaveMsgReply;
 import com.ruoyi.system.domain.UserLeaveMsg;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 /**
  * @program: ruoyi
- *
  * @description:
- *
  * @author: hesion
- *
  * @create: 2019-12-20 16:58
  **/
 @Mapper
 public interface SysLeaveMsgMapper {
     @Select("SELECT * FROM user_leaveMsg WHERE 1=1 ")
-    @Results(id = "SysPetResult",
+    @Results(id = "SysLeaveMsgResult",
             value = {
                     @Result(property = "createTime", column = "create_time"),
             })
-    List<UserLeaveMsg> selectLeaveMsgList(UserLeaveMsg userLeaveMsg) ;
+    List<UserLeaveMsg> selectLeaveMsgList(UserLeaveMsg userLeaveMsg);
+
+    @Select("SELECT * FROM user_leaveMsg WHERE id=#{id}")
+    @Results(id = "SysLeaveMsgResultById",
+            value = {
+                    @Result(property = "createTime", column = "create_time"),
+            })
+    UserLeaveMsg findMsgById(String id);
+
+    @Insert("INSERT INTO user_leaveMsg_reply VALUE(REPLACE(UUID(), '-', ''),#{s.msgId},#{s.replyTime},#{s.replayerId},#{s.replayName},#{s.msg})")
+    int replyMsg(@Param("s") SysLeaveMsgReply sysLeaveMsgReply);
+
+    @Update("UPDATE user_leaveMsg SET  replayStatu = 1 WHERE id=#{id}")
+    int setReplyStatu(String id);
+
+    @Select("SELECT * FROM user_leaveMsg_reply WHERE msgId=#{id} ORDER BY replyTime DESC")
+    List<SysLeaveMsgReply> findReplyById(String id);
 }

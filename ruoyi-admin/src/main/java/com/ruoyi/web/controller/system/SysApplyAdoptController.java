@@ -24,24 +24,37 @@ import java.util.List;
 
 /**
  * @program: ruoyi
- * @description:
+ * @description:  管理员端领养管理
  * @author: hesion
  * @create: 2019-12-19 11:01
  **/
 @Controller
 @RequestMapping("/system/applyAdopt")
 public class SysApplyAdoptController extends BaseController {
+
     String prefix = "system/pet/applyAdopt";
 
     @Autowired
     IApplyAdoptService applyAdoptService;
-
+    /**
+        *@Author hst
+        *@Description //TODO 跳转到领养管理页面  返回页面路径  页面在resource/templates/system下
+        *@Date 上午8:31 2019/12/21
+        *@Param []
+        * @return java.lang.String
+        **/
     @RequiresPermissions("system:adopt:view")
     @GetMapping()
     public String user() {
         return prefix + "/applyAdopt";
     }
-
+   /**
+       *@Author hst
+       *@Description //TODO  领养管理所有数据请求页面
+       *@Date 上午8:29 2019/12/21
+       *@Param [sysAdoptView]
+       * @return com.ruoyi.common.core.page.TableDataInfo
+       **/
     @RequiresPermissions("system:adopt:view")
     @PostMapping("/list")
     @ResponseBody

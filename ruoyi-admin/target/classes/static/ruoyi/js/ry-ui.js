@@ -1162,8 +1162,11 @@ var table = {
             },
             myFostapply: function () {
 				$.modal.open("我的寄养申请","/user/pet/myFostapply");
-            }
-        },
+            },
+			showReply: function (row) {
+				$.modal.open("回复","/system/leaveMsg/reply/"+row);
+			}
+		},
         // 校验封装处理
         validate: {
         	// 判断返回标识是否唯一 false 不存在 true 存在

@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @program: ruoyi
- * @description:
+ * @description:  管理员寄养管理
  * @author: hesion
  * @create: 2019-12-20 11:16
  **/
@@ -35,13 +35,25 @@ public class SysApplyFostController extends BaseController {
     String prefix = "system/pet/applyFost";
     @Autowired
     IApplyFostService applyFostService;
-
+    /**
+        *@Author hst
+        *@Description //TODO 寄养管理页面跳转接口
+        *@Date 上午8:35 2019/12/21
+        *@Param []
+        * @return java.lang.String
+        **/
     @RequiresPermissions("system:adopt:view")
     @GetMapping()
     public String user() {
         return prefix + "/applyFost";
     }
-
+     /**
+         *@Author hst
+         *@Description //TODO 寄养管理数据请求接口
+         *@Date 上午8:37 2019/12/21
+         *@Param [sysFostView]
+         * @return com.ruoyi.common.core.page.TableDataInfo
+         **/
     @RequiresPermissions("system:adopt:view")
     @PostMapping("/list")
     @ResponseBody

@@ -24,9 +24,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 用户信息
+ * 宠物信息
  *
- * @author ruoyi
+ * @author hesion
  */
 @Controller
 @RequestMapping("/system/pet")
@@ -36,13 +36,25 @@ public class SysPetController extends BaseController {
     private ISysPetService petService;
     @Autowired
     private ServerConfig serverConfig;
-
+/**
+    *@Author hst
+    *@Description //TODO 宠物信息页面跳转接口
+    *@Date 上午8:38 2019/12/21
+    *@Param []
+    * @return java.lang.String
+    **/
     @RequiresPermissions("system:pet:view")
     @GetMapping()
     public String user() {
         return prefix + "/pet";
     }
-
+/**
+    *@Author hst
+    *@Description //TODO 宠物信息数据请求接口
+    *@Date 上午8:38 2019/12/21
+    *@Param [sysPet]
+    * @return com.ruoyi.common.core.page.TableDataInfo
+    **/
     @RequiresPermissions("system:pet:list")
     @PostMapping("/list")
     @ResponseBody
@@ -63,14 +75,20 @@ public class SysPetController extends BaseController {
 
 
     /**
-     * 新增用户
+     * 新增宠物页面跳转接口
      */
     @GetMapping("/add")
     @RequiresPermissions("system:pet:add")
     public String add(ModelMap mmap) {
         return prefix + "/add";
     }
-
+/**
+    *@Author hst
+    *@Description //TODO 新增宠物页面请求接口
+    *@Date 上午8:40 2019/12/21
+    *@Param [file, sysPet]
+    * @return com.ruoyi.common.core.domain.AjaxResult
+    **/
     @RequiresPermissions("system:pet:add")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
@@ -93,7 +111,13 @@ public class SysPetController extends BaseController {
         }
         return error();
     }
-
+/**
+    *@Author hst
+    *@Description //TODO 宠物信息删除接口
+    *@Date 上午8:40 2019/12/21
+    *@Param [ids]   传入宠物id数组 支持批量删除
+    * @return com.ruoyi.common.core.domain.AjaxResult
+    **/
     @RequiresPermissions("system:pet:remove")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/remove")
@@ -107,14 +131,20 @@ public class SysPetController extends BaseController {
     }
 
     /**
-     * 修改角色
+     * 修改宠物信息页面跳转接口
      */
     @GetMapping("/edit/{petId}")
     public String edit(@PathVariable("petId") String petId, ModelMap mmap) {
         mmap.put("pet", petService.selectPetById(petId));
         return prefix + "/edit";
     }
-
+/**
+    *@Author hst
+    *@Description //TODO 修改宠物信息页面数据提交接口
+    *@Date 上午8:41 2019/12/21
+    *@Param [file, sysPet]
+    * @return com.ruoyi.common.core.domain.AjaxResult
+    **/
     @RequiresPermissions("system:pet:edit")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/edit")

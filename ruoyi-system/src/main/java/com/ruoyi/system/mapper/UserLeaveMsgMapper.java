@@ -23,6 +23,6 @@ public interface UserLeaveMsgMapper {
 
     @Insert("INSERT INTO" +
             " user_leaveMsg " +
-            "VALUE(REPLACE(UUID(), '-', ''),#{m.uId},#{m.msg},#{m.createTime},#{m.createBy},#{m.replyStatu})")
+            "VALUE(REPLACE(UUID(), '-', ''),#{m.uId},#{m.msg},#{m.createTime},#{m.createBy},#{m.replayStatu})")
     int leave(@Param("m") UserLeaveMsg userLeaveMsg);
 }

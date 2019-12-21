@@ -39,7 +39,7 @@ public class UserLeaveMsgServiceImpl  implements IUserLeaveMsgService {
     @Override
     public int leave(UserLeaveMsg userLeaveMsg) {
         userLeaveMsg.setCreateTime(new Date());
-        userLeaveMsg.setReplyStatu(0);
+        userLeaveMsg.setReplayStatu(0);
         return userLeaveMsgMapper.leave(userLeaveMsg);
     }
 }
