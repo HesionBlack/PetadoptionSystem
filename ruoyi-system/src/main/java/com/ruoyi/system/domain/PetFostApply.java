@@ -36,4 +36,5 @@ public class PetFostApply {
     private Integer confirm;
     private Integer del_flag;
     private Long uId;
+    private String phone;
 }

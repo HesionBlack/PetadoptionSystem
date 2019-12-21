@@ -1,7 +1,7 @@
 package com.ruoyi.system.domain;/**
- * ClassName: SysFostView <br/>
+ * ClassName: UserDonate <br/>
  * Description: <br/>
- * date: 2019/12/20 上午11:24<br/>
+ * date: 2019/12/21 下午4:26<br/>
  *
  * @author Hesion<br />
  * @version
@@ -19,21 +19,22 @@ import java.util.Date;
  *
  * @author: hesion
  *
- * @create: 2019-12-20 11:24
+ * @create: 2019-12-21 16:26
  **/
 @Data
-public class SysFostView {
+public class UserDonate {
     private String id;
-    private String petId;
     private String name;
     private String type;
-    private Integer sex;
-    //宠物备注
-    private String petremark;
-    private String applyName;
     private Date createTime;
+    private Integer sex;
+    private String imageUrl;
+    private String createBy;
     private String updateBy;
-    private Date updateTime;
+    private Date  updateTime;
+    private String remark;
     private Integer confirm;
+    private Integer del_flag;
+    private Long uId;
     private String phone;
 }

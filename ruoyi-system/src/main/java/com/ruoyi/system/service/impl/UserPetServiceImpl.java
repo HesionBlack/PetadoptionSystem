@@ -114,4 +114,9 @@ public class UserPetServiceImpl implements IUserPetService {
             return 0;
         }
     }
+
+    @Override
+    public int donate(UserDonate userDonate) {
+        return userPetMapper.donate(userDonate);
+    }
 }

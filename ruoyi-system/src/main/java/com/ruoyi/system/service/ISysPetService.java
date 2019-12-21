@@ -1,6 +1,8 @@
 package com.ruoyi.system.service;
 
+import com.ruoyi.system.domain.SysDonateVIew;
 import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.UserDonate;
 
 import java.util.List;
 
@@ -24,4 +26,8 @@ public interface ISysPetService {
     SysPet selectPetById(String petId);
 
     int editPet(SysPet sysPet);
+
+    List<SysDonateVIew> selectDonateList(SysDonateVIew sysDonateVIew);
+
+    int agreeDonate(String id, String loginName);
 }

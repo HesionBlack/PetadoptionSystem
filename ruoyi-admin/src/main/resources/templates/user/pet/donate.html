@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('申请寄养')" />
+	<th:block th:include="include :: header('捐赠')" />
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -62,14 +62,14 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
 	function submitHandler() {
-			add();
+			donate();
 	}
-	function add() {
+	function donate() {
 		var name = $("input[name='name']").val();
 		var type = $("input[name='type']").val();
-		var phone = $("input[name='phone']").val();
 		var sex = $('#sex option:selected').val();
 		var remark = $('#remark').val();
+		var phone = $("input[name='phone']").val();
 		var formData = new FormData();
 		if ($('#filePath')[0].files[0] == null) {
 			$.modal.alertWarning("请先选择文件路径");
@@ -87,7 +87,7 @@
 			contentType: false,
 			cache : false,
 			type : "POST",
-			url : ctx + "user/pet/applyfost",
+			url : ctx + "user/pet/donate",
 			data :formData,
 			async : false,
 			error : function(request) {

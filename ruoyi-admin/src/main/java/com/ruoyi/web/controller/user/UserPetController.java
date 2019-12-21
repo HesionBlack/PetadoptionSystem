@@ -18,6 +18,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.PetApplyView;
 import com.ruoyi.system.domain.PetFostApply;
 import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.UserDonate;
 import com.ruoyi.system.service.IUserPetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -149,6 +151,33 @@ public class UserPetController extends BaseController {
         Long userId = ShiroUtils.getUserId();
         List<PetApplyView> myapply = userPetService.myFostapplyPost(userId);
         return getDataTable(myapply);
+    }
+
+
+    @GetMapping("/donate")
+    public String donate(UserDonate userDonate){
+          return prefix+"/donate";
+    }
+    @PostMapping("/donate")
+    public AjaxResult donate(@RequestParam("file") MultipartFile file, UserDonate userDonate) throws IOException {
+        String loginName = ShiroUtils.getLoginName();
+        Long userId = ShiroUtils.getUserId();
+        userDonate.setCreateBy(loginName);
+        // 上传文件路径
+        String filePath = Global.getUploadPath();
+        // 上传并返回新文件名称
+        String fileName = FileUploadUtils.upload(filePath, file);
+        String url = serverConfig.getUrl() + fileName;
+        userDonate.setImageUrl(url);
+        userDonate.setUId(userId);
+        userDonate.setConfirm(0);
+        userDonate.setDel_flag(0);
+        userDonate.setCreateTime(new Date());
+        try {
+            return toAjax(userPetService.donate(userDonate));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
     }
 
 

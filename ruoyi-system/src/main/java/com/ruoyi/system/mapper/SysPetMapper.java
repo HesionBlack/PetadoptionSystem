@@ -1,6 +1,9 @@
 package com.ruoyi.system.mapper;
 
+import com.ruoyi.system.domain.PetFostApply;
+import com.ruoyi.system.domain.SysDonateVIew;
 import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.UserDonate;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
  */
 @Mapper
 public interface SysPetMapper {
+
+
     @Select({"<script> " +
             "SELECT * FROM sys_pet  where del_flag = '0'" +
             "<if test=\"name != null and name != ''\">" +
@@ -55,4 +60,21 @@ public interface SysPetMapper {
 
     @Update("UPDATE sys_pet SET  name=#{p.name},type=#{p.type}, adoptStatu=#{p.adoptStatu},fostStatu=#{p.fostStatu},sex=#{p.sex},imageUrl=#{p.imageUrl},updateBy=#{p.updateBy},update_time=#{p.updateTime},remark=#{p.remark} WHERE id=#{p.id} ")
     int editPet(@Param("p") SysPet sysPet);
+    @Select("SELECT * FROM v_pet_SystemdonateView WHERE del_flag=\'0\'")
+    @Results(id = "v_pet_SystemdonateView",
+            value = {
+                    @Result(property = "createTime", column = "create_time"),
+                    @Result(property = "updateTime", column = "update_time"),
+            })
+    List<SysDonateVIew> selectDonateList(SysDonateVIew sysDonateVIew);
+    @Update("UPDATE user_pet_donate SET  update_time = #{d.updateTime},updateBy=#{d.updateBy}, confirm=#{d.confirm} WHERE id=#{d.id}")
+    int agreeFost(@Param("d") UserDonate userDonate);
+
+    @Select("SELECT * FROM user_pet_donate  WHERE id=#{id}")
+    @Results(id = "user_pet_donate",
+            value = {
+                    @Result(property = "createTime", column = "create_time"),
+                    @Result(property = "updateTime", column = "update_time"),
+            })
+    UserDonate getDonateById(String id);
 }

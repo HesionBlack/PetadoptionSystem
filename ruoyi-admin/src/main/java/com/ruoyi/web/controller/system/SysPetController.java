@@ -9,6 +9,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.SysDonateVIew;
 import com.ruoyi.system.domain.SysPet;
 import com.ruoyi.system.service.ISysPetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -168,5 +169,37 @@ public class SysPetController extends BaseController {
         }
         return error();
     }
+    @GetMapping("/donate")
+    public String donate() {
+        return prefix + "/donate/donate";
+    }
+
+    /**
+     *@Author hst
+     *@Description //TODO 宠物捐赠信数据请求接口
+     *@Date 上午8:38 2019/12/21
+     *@Param [sysPet]
+     * @return com.ruoyi.common.core.page.TableDataInfo
+     **/
+    @RequiresPermissions("system:pet:list")
+    @PostMapping("/donateList")
+    @ResponseBody
+    public TableDataInfo donateList(SysDonateVIew sysDonateVIew) {
+        startPage();
+        List<SysDonateVIew> list = petService.selectDonateList(sysDonateVIew);
+        return getDataTable(list);
+    }
+
+    @GetMapping("/agreeDonate/{id}")
+    @ResponseBody
+    public AjaxResult agreeDonate(@PathVariable String id) {
+        String loginName = ShiroUtils.getLoginName();
+        try {
+            return toAjax(petService.agreeDonate(id, loginName));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
+    }
+
 
 }

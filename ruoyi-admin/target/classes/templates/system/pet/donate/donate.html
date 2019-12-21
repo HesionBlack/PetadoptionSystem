@@ -61,7 +61,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
     var removeFlag = [[${@permission.hasPermi('system:pet:remove')}]];
-    var prefix = ctx + "system/applyFost";
+    var prefix = ctx + "system/pet";
 
     $(function () {
         var panehHidden = false;
@@ -74,8 +74,7 @@
 
     function queryUserList() {
         var options = {
-            url: prefix + "/list",
-            removeUrl: prefix + "/remove",
+            url: prefix + "/donateList",
             sortName: "createTime",
             sortOrder: "desc",
             modalName: "宠物领养处理",
@@ -107,7 +106,7 @@
                 },
                 {
                     field: 'petremark',
-                    title: '申请理由'
+                    title: '宠物备注'
                 },
                 {
                     field: 'applyName',
@@ -116,7 +115,7 @@
                 {
                     field: 'phone',
                     title: '联系电话'
-                }
+                },
                 {
                     field: 'confirm',
                     title: '状态',
@@ -161,7 +160,7 @@
 
             cache: false,
             type: "Get",
-            url: ctx + "user/pet/agreeFost/" + row,
+            url: ctx + "system/pet/agreeDonate/" + row,
             async: false,
             error: function (request) {
                 $.modal.alertError("系统错误");

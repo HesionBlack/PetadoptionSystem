@@ -9,12 +9,16 @@ package com.ruoyi.system.service.impl;/**
  */
 
 import com.ruoyi.common.annotation.DataScope;
+import com.ruoyi.system.domain.PetFostApply;
+import com.ruoyi.system.domain.SysDonateVIew;
 import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.UserDonate;
 import com.ruoyi.system.mapper.SysPetMapper;
 import com.ruoyi.system.service.ISysPetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,5 +65,41 @@ public class SysPetServiceImpl implements ISysPetService {
     @Override
     public int editPet(SysPet sysPet) {
         return sysPetMapper.editPet(sysPet);
+    }
+
+    @Override
+    public List<SysDonateVIew> selectDonateList(SysDonateVIew sysDonateVIew) {
+        return sysPetMapper.selectDonateList(sysDonateVIew);
+    }
+
+    @Override
+    public int agreeDonate(String id, String loginName) {
+        UserDonate userDonate = new UserDonate();
+        userDonate.setConfirm(1);
+        userDonate.setUpdateBy(loginName);
+        userDonate.setUpdateTime(new Date());
+        userDonate.setId(id);
+        int result = sysPetMapper.agreeFost(userDonate);
+        if(result > 0){
+            UserDonate donate= sysPetMapper.getDonateById(id);
+            SysPet sysPet = new SysPet();
+            sysPet.setName(donate.getName());
+            sysPet.setType(donate.getType());
+            sysPet.setCreateTime(new Date());
+            sysPet.setAdoptStatu(0);
+            sysPet.setFostStatu(0);
+            sysPet.setSex(donate.getSex());
+            sysPet.setImageUrl(donate.getImageUrl());
+            sysPet.setCreateBy(donate.getUpdateBy());
+            sysPet.setUpdateBy(donate.getUpdateBy());
+            sysPet.setUpdateTime(userDonate.getUpdateTime());
+            sysPet.setRemark(donate.getRemark());
+            sysPet.setDel_flag(0);
+            sysPetMapper.savePet(sysPet);
+//            userPetMapper.PetInfoRecord(sysPet);
+            return result;
+        }else{
+            return 0;
+        }
     }
 }

@@ -27,4 +27,5 @@ public interface IUserPetService {
 
     int agreeFost(String id, String loginName);
 
+    int donate(UserDonate userDonate);
 }

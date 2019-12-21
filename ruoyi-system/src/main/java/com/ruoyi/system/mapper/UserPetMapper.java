@@ -1,9 +1,6 @@
 package com.ruoyi.system.mapper;
 
-import com.ruoyi.system.domain.PetApply;
-import com.ruoyi.system.domain.PetApplyView;
-import com.ruoyi.system.domain.PetFostApply;
-import com.ruoyi.system.domain.SysPet;
+import com.ruoyi.system.domain.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -28,7 +25,7 @@ public interface UserPetMapper {
             "<if test=\"params.endTime != null and params.endTime != ''\">" +
             "AND date_format(createTime,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')</if>" +
             "</script>"})
-    @Results(id = "SysPetResult",
+    @Results(id = "sys_pet",
             value = {
                     @Result(property = "createTime", column = "create_time"),
                     @Result(property = "updateTime", column = "update_time"),
@@ -50,7 +47,7 @@ public interface UserPetMapper {
 
     @Insert("INSERT INTO" +
             "  user_pet_applyfost  " +
-            "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{p.uId})")
+            "VALUE(REPLACE(UUID(), '-', ''),#{p.name},#{p.type},#{p.createTime},#{p.sex},#{p.imageUrl},#{p.createBy},#{p.updateBy},#{p.updateTime},#{p.remark},#{p.del_flag},#{p.confirm},#{p.uId},#{p.phone})")
     int fostapply(@Param("p") PetFostApply petFostApply);
 
     @Select("SELECT * FROM v_pet_myapplyfostview WHERE uId=#{userId} ")
@@ -66,4 +63,10 @@ public interface UserPetMapper {
                     @Result(property = "updateTime", column = "update_time"),
             })
     PetFostApply getFostPetById(String id);
+    @Insert("INSERT INTO" +
+            "  user_pet_donate  " +
+            "VALUE(REPLACE(UUID(), '-', ''),#{s.name},#{s.type},#{s.createTime},#{s.sex},#{s.imageUrl},#{s.createBy},#{s.updateBy},#{s.updateTime},#{s.remark},#{s.del_flag},#{s.confirm},#{s.uId},#{s.phone})")
+    int donate(@Param("s") UserDonate userDonate);
+
+
 }

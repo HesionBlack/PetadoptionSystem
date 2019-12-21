@@ -22,7 +22,7 @@ import java.util.Date;
  * @create: 2019-12-20 11:24
  **/
 @Data
-public class SysFostView {
+public class SysDonateVIew {
     private String id;
     private String petId;
     private String name;
