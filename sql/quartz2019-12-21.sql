@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 21/12/2019 12:59:40
+ Date: 21/12/2019 19:56:09
 */
 
 SET NAMES utf8mb4;
@@ -210,7 +210,7 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 -- Records of QRTZ_SCHEDULER_STATE
 -- ----------------------------
 BEGIN;
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('RuoyiScheduler', 'bogon1576904303412', 1576904367359, 15000);
+INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('RuoyiScheduler', 'bogon1576929295929', 1576929362971, 15000);
 COMMIT;
 
 -- ----------------------------
@@ -281,9 +281,9 @@ CREATE TABLE `QRTZ_TRIGGERS` (
 -- Records of QRTZ_TRIGGERS
 -- ----------------------------
 BEGIN;
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1576904310000, -1, 5, 'PAUSED', 'CRON', 1576904303000, 0, NULL, 2, '');
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1576904310000, -1, 5, 'PAUSED', 'CRON', 1576904303000, 0, NULL, 2, '');
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1576904320000, -1, 5, 'PAUSED', 'CRON', 1576904303000, 0, NULL, 2, '');
+INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1576929300000, -1, 5, 'PAUSED', 'CRON', 1576929296000, 0, NULL, 2, '');
+INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1576929300000, -1, 5, 'PAUSED', 'CRON', 1576929296000, 0, NULL, 2, '');
+INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1576929300000, -1, 5, 'PAUSED', 'CRON', 1576929296000, 0, NULL, 2, '');
 COMMIT;
 
 -- ----------------------------
@@ -519,7 +519,7 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -648,6 +648,16 @@ INSERT INTO `sys_logininfor` VALUES (219, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (220, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 11:14:56');
 INSERT INTO `sys_logininfor` VALUES (221, 'user', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 11:32:40');
 INSERT INTO `sys_logininfor` VALUES (222, 'user', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 12:38:22');
+INSERT INTO `sys_logininfor` VALUES (223, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 16:12:01');
+INSERT INTO `sys_logininfor` VALUES (224, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '退出成功', '2019-12-21 16:14:19');
+INSERT INTO `sys_logininfor` VALUES (225, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 16:14:29');
+INSERT INTO `sys_logininfor` VALUES (226, 'user', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 16:14:39');
+INSERT INTO `sys_logininfor` VALUES (227, 'user', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 17:47:32');
+INSERT INTO `sys_logininfor` VALUES (228, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 17:52:17');
+INSERT INTO `sys_logininfor` VALUES (229, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 19:14:11');
+INSERT INTO `sys_logininfor` VALUES (230, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 19:29:52');
+INSERT INTO `sys_logininfor` VALUES (231, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', '0', '登录成功', '2019-12-21 19:36:17');
+INSERT INTO `sys_logininfor` VALUES (232, 'user', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', '0', '登录成功', '2019-12-21 19:36:39');
 COMMIT;
 
 -- ----------------------------
@@ -671,7 +681,7 @@ CREATE TABLE `sys_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2015 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2016 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单权限表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -773,6 +783,7 @@ INSERT INTO `sys_menu` VALUES (2011, '宠物寄养管理', 1, 1, '/system/applyF
 INSERT INTO `sys_menu` VALUES (2012, '给驿站留言', 2007, 4, '/user/leaveMsg', 'menuItem', 'C', '0', 'user:leaveMsg:view', '#', 'admin', '2019-12-20 13:32:17', 'admin', '2019-12-20 14:45:00', '');
 INSERT INTO `sys_menu` VALUES (2013, '留言管理', 1, 1, '/system/leaveMsg', 'menuItem', 'C', '0', 'system:leaveMsg:view', '#', 'admin', '2019-12-20 15:36:03', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2014, '捐赠管理', 1, 1, '/system/pet/donate', 'menuItem', 'C', '0', 'system:donate:view', '#', 'admin', '2019-12-21 09:32:08', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2015, '捐赠宠物', 2007, 4, '/user/pet/donate', 'menuItem', 'C', '0', 'user:donate:view', '#', 'admin', '2019-12-21 16:13:37', '', NULL, '');
 COMMIT;
 
 -- ----------------------------
@@ -823,7 +834,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -924,6 +935,9 @@ INSERT INTO `sys_oper_log` VALUES (191, '菜单管理', 2, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (192, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/role/edit', '127.0.0.1', '内网IP', '{\n  \"roleId\" : [ \"2\" ],\n  \"roleName\" : [ \"普通角色\" ],\n  \"roleKey\" : [ \"common\" ],\n  \"roleSort\" : [ \"2\" ],\n  \"status\" : [ \"0\" ],\n  \"remark\" : [ \"普通角色\" ],\n  \"menuIds\" : [ \"2007,2008,2010,2012\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-20 14:46:34');
 INSERT INTO `sys_oper_log` VALUES (193, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\n  \"parentId\" : [ \"1\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"留言管理\" ],\n  \"url\" : [ \"/system/leaveMsg\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"system:leaveMsg:view\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"icon\" : [ \"\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-20 15:36:03');
 INSERT INTO `sys_oper_log` VALUES (194, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\n  \"parentId\" : [ \"1\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"捐赠管理\" ],\n  \"url\" : [ \"/system/pet/donate\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"system:donate:view\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"icon\" : [ \"\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-21 09:32:08');
+INSERT INTO `sys_oper_log` VALUES (195, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\n  \"parentId\" : [ \"2007\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"捐赠宠物\" ],\n  \"url\" : [ \"/user/pet/donate\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"user:donate:view\" ],\n  \"orderNum\" : [ \"4\" ],\n  \"icon\" : [ \"\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-21 16:13:37');
+INSERT INTO `sys_oper_log` VALUES (196, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/role/edit', '127.0.0.1', '内网IP', '{\n  \"roleId\" : [ \"2\" ],\n  \"roleName\" : [ \"普通角色\" ],\n  \"roleKey\" : [ \"common\" ],\n  \"roleSort\" : [ \"2\" ],\n  \"status\" : [ \"0\" ],\n  \"remark\" : [ \"普通角色\" ],\n  \"menuIds\" : [ \"2007,2008,2010,2012,2015\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-21 16:15:18');
+INSERT INTO `sys_oper_log` VALUES (197, '宠物管理', 1, 'com.ruoyi.web.controller.system.SysPetController.remove()', 'POST', 1, 'admin', '研发部门', '/system/pet/remove', '127.0.0.1', '内网IP', '{\n  \"ids\" : [ \"b6a815ea22e711ea823e91afbb9bd661\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', 0, NULL, '2019-12-21 19:55:10');
 COMMIT;
 
 -- ----------------------------
@@ -955,10 +969,47 @@ INSERT INTO `sys_pet` VALUES ('1', '二哈', '雪橇犬', '2019-12-16 14:36:46',
 INSERT INTO `sys_pet` VALUES ('2', '阿拉斯加犬', '雪橇犬', '2019-12-16 16:47:30', 0, 0, 1, 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3834139921,1086274215&fm=173&app=49&f=JPEG?w=634&h=419&s=23A3DA05428754F198B9147D03008073', 'ruoyi', 'admin', '2019-12-19 13:46:56', '这是雪橇三傻之一', '0');
 INSERT INTO `sys_pet` VALUES ('25e45d8c22e911ea823e91afbb9bd661', '二哈哈哈', '雪橇犬', '2019-12-20 13:25:35', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/c59c2724fe4dd2a346ad5b66f01fc76f.jpeg', 'admin', NULL, '2019-12-20 13:25:35', '1231', '0');
 INSERT INTO `sys_pet` VALUES ('26b56306214411eaab5a9a7da1b39bee', '萨摩', '雪橇犬', '2019-12-18 11:11:58', 1, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/18/989bf7f479d3871ef1310ed1c281d977.jpeg', 'admin', 'admin', '2019-12-19 14:29:46', '', '0');
+INSERT INTO `sys_pet` VALUES ('3ef96e7223e611eaaef9a7371ade0b99', 'sasd', 'asd', '2019-12-21 19:37:19', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/21/0c759bc6b6a574d626405f4615c1e90b.jpeg', 'admin', 'admin', '2019-12-21 19:37:19', '123123', '0');
 INSERT INTO `sys_pet` VALUES ('4e1c7b2020a711ea972d02c5d9ef22d8', 'ff', 'ww', '2019-12-17 16:29:13', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/70790eb4e84a0aa1afaabe1e319e7e99.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'w', '2');
 INSERT INTO `sys_pet` VALUES ('64ddcd0020a211ea972d02c5d9ef22d8', '2', 'ww', '2019-12-17 15:54:04', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/5bf8fbe586601e31f45abc239d66350a.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'sd', '2');
+INSERT INTO `sys_pet` VALUES ('977bcda223e511eaaef9a7371ade0b99', '萨摩犬', '雪橇犬', '2019-12-21 19:32:38', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/21/ca1bb2c4bd34efae381f6e816f28b545.jpeg', 'admin', 'admin', '2019-12-21 19:32:38', '111', '0');
 INSERT INTO `sys_pet` VALUES ('a140cb5a209611ea972d02c5d9ef22d8', 'w', 'ww', '2019-12-17 14:29:51', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/cfd2e4890b693a3d6e7ef1eaedfc3253.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'w', '0');
-INSERT INTO `sys_pet` VALUES ('b6a815ea22e711ea823e91afbb9bd661', '12', '12', '2019-12-20 13:15:19', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/a787df206b2bba9255eea8276327348b.jpeg', 'admin', NULL, NULL, '12', '0');
+INSERT INTO `sys_pet` VALUES ('b6a815ea22e711ea823e91afbb9bd661', '12', '12', '2019-12-20 13:15:19', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/a787df206b2bba9255eea8276327348b.jpeg', 'admin', NULL, NULL, '12', '2');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_pet_copy1
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_pet_copy1`;
+CREATE TABLE `sys_pet_copy1` (
+  `id` varchar(36) NOT NULL COMMENT '宠物id',
+  `name` varchar(255) DEFAULT NULL COMMENT '宠物名称',
+  `type` varchar(255) DEFAULT NULL COMMENT '宠物类型',
+  `create_time` datetime DEFAULT NULL COMMENT '入站时间',
+  `adoptStatu` int(11) DEFAULT NULL COMMENT '领养状态（0表示未被领养 1表示已被领养）',
+  `fostStatu` int(11) DEFAULT NULL COMMENT '是否为寄养',
+  `sex` int(11) DEFAULT NULL COMMENT '性别',
+  `imageUrl` varchar(255) DEFAULT NULL COMMENT '图片地址',
+  `createBy` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `updateBy` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `del_flag` varchar(255) DEFAULT NULL COMMENT '删除标志（0代表存在 2代表删除）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of sys_pet_copy1
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_pet_copy1` VALUES ('1', '二哈', '雪橇犬', '2019-12-16 14:36:46', 0, 0, 1, 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576490779740&di=1ab8905079727e05e66db218b93b96cb&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FgDocjyIE%3DrAKuSnFNZbsZKpLVpRicfdP0hKbQbN1ZUPWT1523430130235.jpg', 'ruoyi', 'admin', '2019-12-19 13:46:56', '这是一只二哈', '0');
+INSERT INTO `sys_pet_copy1` VALUES ('2', '阿拉斯加犬', '雪橇犬', '2019-12-16 16:47:30', 0, 0, 1, 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3834139921,1086274215&fm=173&app=49&f=JPEG?w=634&h=419&s=23A3DA05428754F198B9147D03008073', 'ruoyi', 'admin', '2019-12-19 13:46:56', '这是雪橇三傻之一', '0');
+INSERT INTO `sys_pet_copy1` VALUES ('25e45d8c22e911ea823e91afbb9bd661', '二哈哈哈', '雪橇犬', '2019-12-20 13:25:35', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/c59c2724fe4dd2a346ad5b66f01fc76f.jpeg', 'admin', NULL, '2019-12-20 13:25:35', '1231', '0');
+INSERT INTO `sys_pet_copy1` VALUES ('26b56306214411eaab5a9a7da1b39bee', '萨摩', '雪橇犬', '2019-12-18 11:11:58', 1, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/18/989bf7f479d3871ef1310ed1c281d977.jpeg', 'admin', 'admin', '2019-12-19 14:29:46', '', '0');
+INSERT INTO `sys_pet_copy1` VALUES ('4e1c7b2020a711ea972d02c5d9ef22d8', 'ff', 'ww', '2019-12-17 16:29:13', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/70790eb4e84a0aa1afaabe1e319e7e99.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'w', '2');
+INSERT INTO `sys_pet_copy1` VALUES ('64ddcd0020a211ea972d02c5d9ef22d8', '2', 'ww', '2019-12-17 15:54:04', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/5bf8fbe586601e31f45abc239d66350a.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'sd', '2');
+INSERT INTO `sys_pet_copy1` VALUES ('a140cb5a209611ea972d02c5d9ef22d8', 'w', 'ww', '2019-12-17 14:29:51', 0, 0, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/17/cfd2e4890b693a3d6e7ef1eaedfc3253.jpeg', 'admin', 'admin', '2019-12-19 13:46:56', 'w', '0');
+INSERT INTO `sys_pet_copy1` VALUES ('b6a815ea22e711ea823e91afbb9bd661', '12', '12', '2019-12-20 13:15:19', 0, 1, 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/a787df206b2bba9255eea8276327348b.jpeg', 'admin', NULL, NULL, '12', '0');
 COMMIT;
 
 -- ----------------------------
@@ -1013,7 +1064,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_role` VALUES (1, '管理员', 'admin', 1, '1', '0', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '1', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2019-12-20 14:46:34', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '1', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2019-12-21 16:15:18', '普通角色');
 INSERT INTO `sys_role` VALUES (100, '普通管理员', 'commonAdmin', 3, '2', '0', '0', 'admin', '2019-12-18 14:05:57', 'admin', '2019-12-18 17:16:21', '');
 COMMIT;
 
@@ -1045,6 +1096,7 @@ INSERT INTO `sys_role_menu` VALUES (2, 2007);
 INSERT INTO `sys_role_menu` VALUES (2, 2008);
 INSERT INTO `sys_role_menu` VALUES (2, 2010);
 INSERT INTO `sys_role_menu` VALUES (2, 2012);
+INSERT INTO `sys_role_menu` VALUES (2, 2015);
 INSERT INTO `sys_role_menu` VALUES (100, 1);
 INSERT INTO `sys_role_menu` VALUES (100, 2);
 INSERT INTO `sys_role_menu` VALUES (100, 3);
@@ -1167,9 +1219,9 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2019-12-21 11:14:56', 'admin', '2018-03-16 11:33:00', 'ry', '2019-12-21 11:14:56', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2019-12-21 19:36:17', 'admin', '2018-03-16 11:33:00', 'ry', '2019-12-21 19:36:17', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', 'ce8a6bff0cfb7c927f7a3ab41822e6a6', '0e17b7', '0', '0', '127.0.0.1', '2019-12-18 17:09:45', 'admin', '2018-03-16 11:33:00', 'ry', '2019-12-18 17:09:45', '测试员');
-INSERT INTO `sys_user` VALUES (100, 105, 'user', '爱心市民', '00', '1026320617@qq.com', '13422212222', '0', '', 'fe5a799a8a2e6d2974dd753614f19b6d', 'ea52aa', '0', '0', '127.0.0.1', '2019-12-21 12:38:22', 'admin', '2019-12-18 13:12:01', 'admin', '2019-12-21 12:38:22', '');
+INSERT INTO `sys_user` VALUES (100, 105, 'user', '爱心市民', '00', '1026320617@qq.com', '13422212222', '0', '', 'fe5a799a8a2e6d2974dd753614f19b6d', 'ea52aa', '0', '0', '127.0.0.1', '2019-12-21 19:36:40', 'admin', '2019-12-18 13:12:01', 'admin', '2019-12-21 19:36:39', '');
 COMMIT;
 
 -- ----------------------------
@@ -1195,8 +1247,8 @@ CREATE TABLE `sys_user_online` (
 -- Records of sys_user_online
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user_online` VALUES ('36ce969e-ad19-4941-873d-9fe727712327', 'user', '测试部门', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', 'on_line', '2019-12-21 12:38:15', '2019-12-21 12:56:55', 1800000);
-INSERT INTO `sys_user_online` VALUES ('87be36af-1223-4b5d-bbd0-76f3bacb839c', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', 'on_line', '2019-12-21 10:17:46', '2019-12-21 12:58:38', 1800000);
+INSERT INTO `sys_user_online` VALUES ('9347a223-a152-439c-94cb-d61e9d4c8e65', 'user', '测试部门', '127.0.0.1', '内网IP', 'Firefox 7', 'Mac OS X', 'on_line', '2019-12-21 19:14:02', '2019-12-21 19:36:40', 1800000);
+INSERT INTO `sys_user_online` VALUES ('dd87669a-91de-4dd8-9f9f-ffbaf8859984', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome', 'Mac OS X', 'on_line', '2019-12-21 19:29:45', '2019-12-21 19:55:04', 1800000);
 COMMIT;
 
 -- ----------------------------
@@ -1327,6 +1379,7 @@ CREATE TABLE `user_pet_applyfost` (
   `del_flag` varchar(255) DEFAULT NULL COMMENT '删除标志（0代表存在 2代表删除）',
   `confirm` int(11) DEFAULT NULL COMMENT '申请状态 0 待处理 1 同意寄养',
   `uId` bigint(36) DEFAULT NULL COMMENT '用户id',
+  `phone` varchar(255) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -1334,8 +1387,38 @@ CREATE TABLE `user_pet_applyfost` (
 -- Records of user_pet_applyfost
 -- ----------------------------
 BEGIN;
-INSERT INTO `user_pet_applyfost` VALUES ('2a3b437e22e811ea823e91afbb9bd661', '二哈哈哈', '雪橇犬', '2019-12-20 13:18:32', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/c59c2724fe4dd2a346ad5b66f01fc76f.jpeg', 'user', 'admin', '2019-12-20 13:25:35', '1231', '0', 1, 100);
-INSERT INTO `user_pet_applyfost` VALUES ('647af0c822d611ea823e91afbb9bd661', '12', '12', '2019-12-20 11:11:19', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/a787df206b2bba9255eea8276327348b.jpeg', 'user', 'admin', '2019-12-20 13:15:19', '12', '0', 1, 100);
+INSERT INTO `user_pet_applyfost` VALUES ('2a3b437e22e811ea823e91afbb9bd661', '二哈哈哈', '雪橇犬', '2019-12-20 13:18:32', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/c59c2724fe4dd2a346ad5b66f01fc76f.jpeg', 'user', 'admin', '2019-12-20 13:25:35', '1231', '0', 1, 100, '10086');
+INSERT INTO `user_pet_applyfost` VALUES ('647af0c822d611ea823e91afbb9bd661', '12', '12', '2019-12-20 11:11:19', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/20/a787df206b2bba9255eea8276327348b.jpeg', 'user', 'admin', '2019-12-20 13:15:19', '12', '0', 1, 100, '10086');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for user_pet_donate
+-- ----------------------------
+DROP TABLE IF EXISTS `user_pet_donate`;
+CREATE TABLE `user_pet_donate` (
+  `id` varchar(36) NOT NULL COMMENT '宠物id',
+  `name` varchar(255) DEFAULT NULL COMMENT '宠物名称',
+  `type` varchar(255) DEFAULT NULL COMMENT '宠物类型',
+  `create_time` datetime DEFAULT NULL COMMENT '入站时间',
+  `sex` int(11) DEFAULT NULL COMMENT '性别',
+  `imageUrl` varchar(255) DEFAULT NULL COMMENT '图片地址',
+  `createBy` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `updateBy` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `del_flag` varchar(255) DEFAULT NULL COMMENT '删除标志（0代表存在 2代表删除）',
+  `confirm` int(11) DEFAULT NULL COMMENT '申请状态 0 待处理 1 同意寄养',
+  `uId` bigint(36) DEFAULT NULL COMMENT '用户id',
+  `phone` varchar(255) DEFAULT NULL COMMENT '联系电话',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of user_pet_donate
+-- ----------------------------
+BEGIN;
+INSERT INTO `user_pet_donate` VALUES ('377761ea23e611eaaef9a7371ade0b99', 'sasd', 'asd', '2019-12-21 19:37:07', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/21/0c759bc6b6a574d626405f4615c1e90b.jpeg', 'user', 'admin', '2019-12-21 19:37:19', '123123', '0', 1, 100, '111121212121');
+INSERT INTO `user_pet_donate` VALUES ('44e774da23d911eaaef9a7371ade0b99', '萨摩犬', '雪橇犬', '2019-12-21 18:54:52', 1, 'http://127.0.0.1:8889/profile/upload/2019/12/21/ca1bb2c4bd34efae381f6e816f28b545.jpeg', 'user', 'admin', '2019-12-21 19:32:38', '111', '0', 1, 100, '1000086');
 COMMIT;
 
 -- ----------------------------
@@ -1348,7 +1431,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for v_pet_applyfost
 -- ----------------------------
 DROP VIEW IF EXISTS `v_pet_applyfost`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pet_applyfost` AS select `user_pet_applyfost`.`id` AS `id`,`user_pet_applyfost`.`name` AS `name`,`user_pet_applyfost`.`type` AS `type`,`user_pet_applyfost`.`sex` AS `sex`,`user_pet_applyfost`.`remark` AS `petremark`,`sys_user`.`user_name` AS `applyName`,`user_pet_applyfost`.`create_time` AS `create_time`,`user_pet_applyfost`.`update_time` AS `update_time`,`user_pet_applyfost`.`updateBy` AS `updateBy`,`user_pet_applyfost`.`confirm` AS `confirm`,`user_pet_applyfost`.`del_flag` AS `del_flag` from (`user_pet_applyfost` left join `sys_user` on((`user_pet_applyfost`.`uId` = `sys_user`.`user_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pet_applyfost` AS select `user_pet_applyfost`.`id` AS `id`,`user_pet_applyfost`.`name` AS `name`,`user_pet_applyfost`.`type` AS `type`,`user_pet_applyfost`.`sex` AS `sex`,`user_pet_applyfost`.`remark` AS `petremark`,`sys_user`.`user_name` AS `applyName`,`user_pet_applyfost`.`create_time` AS `create_time`,`user_pet_applyfost`.`update_time` AS `update_time`,`user_pet_applyfost`.`updateBy` AS `updateBy`,`user_pet_applyfost`.`confirm` AS `confirm`,`user_pet_applyfost`.`del_flag` AS `del_flag`,`user_pet_applyfost`.`phone` AS `phone` from (`user_pet_applyfost` left join `sys_user` on((`user_pet_applyfost`.`uId` = `sys_user`.`user_id`)));
 
 -- ----------------------------
 -- View structure for v_pet_myapplyfostview
@@ -1361,5 +1444,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `v_pet_myapplyview`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pet_myapplyview` AS select `sys_pet`.`name` AS `petName`,`sys_pet`.`type` AS `type`,`sys_pet`.`sex` AS `sex`,`user_pet_apply`.`create_time` AS `createTime`,`user_pet_apply`.`confirm` AS `confirm`,`user_pet_apply`.`uId` AS `uId` from ((`user_pet_apply` left join `sys_pet` on((`user_pet_apply`.`pId` = `sys_pet`.`id`))) left join `sys_user` on((`sys_user`.`user_id` = `user_pet_apply`.`uId`)));
+
+-- ----------------------------
+-- View structure for v_pet_systemdonateview
+-- ----------------------------
+DROP VIEW IF EXISTS `v_pet_systemdonateview`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pet_systemdonateview` AS select `user_pet_donate`.`id` AS `id`,`user_pet_donate`.`name` AS `name`,`user_pet_donate`.`type` AS `type`,`user_pet_donate`.`sex` AS `sex`,`user_pet_donate`.`remark` AS `petremark`,`sys_user`.`user_name` AS `applyName`,`user_pet_donate`.`create_time` AS `create_time`,`user_pet_donate`.`update_time` AS `update_time`,`user_pet_donate`.`updateBy` AS `updateBy`,`user_pet_donate`.`confirm` AS `confirm`,`user_pet_donate`.`del_flag` AS `del_flag`,`user_pet_donate`.`phone` AS `phone` from (`user_pet_donate` left join `sys_user` on((`user_pet_donate`.`uId` = `sys_user`.`user_id`)));
 
 SET FOREIGN_KEY_CHECKS = 1;
