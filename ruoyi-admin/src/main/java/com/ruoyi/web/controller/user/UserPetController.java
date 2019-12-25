@@ -130,7 +130,8 @@ public class UserPetController extends BaseController {
         String filePath = Global.getUploadPath();
         // 上传并返回新文件名称
         String fileName = FileUploadUtils.upload(filePath, file);
-        String url = serverConfig.getUrl() + fileName;
+        String urlBase = serverConfig.getUrl() + fileName;
+        String url = urlBase.substring(urlBase.indexOf("/p"));
         petFostApply.setImageUrl(url);
         petFostApply.setUId(userId);
         try {
@@ -167,7 +168,8 @@ public class UserPetController extends BaseController {
         String filePath = Global.getUploadPath();
         // 上传并返回新文件名称
         String fileName = FileUploadUtils.upload(filePath, file);
-        String url = serverConfig.getUrl() + fileName;
+        String urlBase = serverConfig.getUrl() + fileName;
+        String url = urlBase.substring(urlBase.indexOf("/p"));
         userDonate.setImageUrl(url);
         userDonate.setUId(userId);
         userDonate.setConfirm(0);

@@ -100,6 +100,8 @@ public class SysPetController extends BaseController {
         // 上传并返回新文件名称
         String fileName = FileUploadUtils.upload(filePath, file);
         String url = serverConfig.getUrl() + fileName;
+//        String urlBase = serverConfig.getUrl() + fileName;
+//        String url = urlBase.substring(urlBase.indexOf('/'));
         sysPet.setCreateBy(ShiroUtils.getLoginName());
         sysPet.setCreateTime(new Date());
         sysPet.setAdoptStatu(0);
