@@ -58,6 +58,7 @@ public class UserLeaveMsgController extends BaseController {
     }
 
     @PostMapping("/leave")
+    @ResponseBody
     public AjaxResult leavePost(UserLeaveMsg userLeaveMsg) {
         Long userId = ShiroUtils.getUserId();
         userLeaveMsg.setUId(userId);
