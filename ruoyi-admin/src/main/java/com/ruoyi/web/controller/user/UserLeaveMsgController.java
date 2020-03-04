@@ -33,7 +33,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user/leaveMsg")
 public class UserLeaveMsgController extends BaseController {
-    String prefix = "/user/leaveMsg";
+    String prefix = "user/leaveMsg";
     @Autowired
     IUserLeaveMsgService userLeaveMsgService;
 
