@@ -1,12 +1,12 @@
 package com.ruoyi.system.mapper;
 
-import com.ruoyi.system.domain.PetFostApply;
 import com.ruoyi.system.domain.SysDonateVIew;
 import com.ruoyi.system.domain.SysPet;
 import com.ruoyi.system.domain.UserDonate;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+
 
 /**
  * ClassName: SysPetMapper <br/>

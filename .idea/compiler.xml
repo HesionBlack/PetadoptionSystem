@@ -22,7 +22,6 @@
       <module name="ruoyi-generator" target="1.8" />
       <module name="ruoyi-quartz" target="1.8" />
       <module name="ruoyi-system" target="1.8" />
-      <module name="ruoyiuser" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
