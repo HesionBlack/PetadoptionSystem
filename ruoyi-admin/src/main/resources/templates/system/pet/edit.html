@@ -73,10 +73,10 @@
 			var remark = $('#remark').val();
 			var id = $('#id').val();
 			var formData = new FormData();
-			if ($('#filePath')[0].files[0] == null) {
-				$.modal.alertWarning("请先选择文件路径");
-				return false;
-			}
+			// if ($('#filePath')[0].files[0] == null) {
+			// 	$.modal.alertWarning("请先选择文件路径");
+			// 	return false;
+			// }
 			formData.append("id", id);
 			formData.append('name', name);
 			formData.append('type', type);
