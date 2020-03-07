@@ -59,7 +59,7 @@
 <th:block th:include="include :: layout-latest-js"/>
 <th:block th:include="include :: ztree-js"/>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
+    // var editFlag = [[${@permission.hasPermi('system:pet:edit')}]];
     var removeFlag = [[${@permission.hasPermi('system:pet:remove')}]];
     var prefix = ctx + "system/applyFost";
 
@@ -148,7 +148,7 @@
                     formatter: function (value, row, index) {
                         var actions = [];
                         if(row.confirm === 0){
-                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="agreeApply(\'' + row.id +'\')"><i class="fa fa-edit"></i>同意寄养</a> ');
+                            actions.push('<a class="btn btn-success btn-xs ' + '" href="javascript:void(0)" onclick="agreeApply(\'' + row.id +'\')"><i class="fa fa-edit"></i>同意寄养</a> ');
                         }
                         return actions.join('');
                     }

@@ -42,7 +42,7 @@ public class SysApplyFostController extends BaseController {
         *@Param []
         * @return java.lang.String
         **/
-    @RequiresPermissions("system:adopt:view")
+//    @RequiresPermissions("system:adopt:view")
     @GetMapping()
     public String user() {
         return prefix + "/applyFost";
@@ -54,7 +54,7 @@ public class SysApplyFostController extends BaseController {
          *@Param [sysFostView]
          * @return com.ruoyi.common.core.page.TableDataInfo
          **/
-    @RequiresPermissions("system:adopt:view")
+//    @RequiresPermissions("system:adopt:view")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SysFostView sysFostView) {
