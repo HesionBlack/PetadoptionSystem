@@ -14,6 +14,7 @@ import com.ruoyi.system.domain.SysPet;
 import com.ruoyi.system.service.ISysPetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
@@ -37,25 +38,27 @@ public class SysPetController extends BaseController {
     private ISysPetService petService;
     @Autowired
     private ServerConfig serverConfig;
-/**
-    *@Author hst
-    *@Description //TODO 宠物信息页面跳转接口
-    *@Date 上午8:38 2019/12/21
-    *@Param []
-    * @return java.lang.String
-    **/
+
+    /**
+     * @return java.lang.String
+     * @Author hst
+     * @Description //TODO 宠物信息页面跳转接口
+     * @Date 上午8:38 2019/12/21
+     * @Param []
+     **/
     @RequiresPermissions("system:pet:view")
     @GetMapping()
     public String user() {
         return prefix + "/pet";
     }
-/**
-    *@Author hst
-    *@Description //TODO 宠物信息数据请求接口
-    *@Date 上午8:38 2019/12/21
-    *@Param [sysPet]
-    * @return com.ruoyi.common.core.page.TableDataInfo
-    **/
+
+    /**
+     * @return com.ruoyi.common.core.page.TableDataInfo
+     * @Author hst
+     * @Description //TODO 宠物信息数据请求接口
+     * @Date 上午8:38 2019/12/21
+     * @Param [sysPet]
+     **/
     @RequiresPermissions("system:pet:list")
     @PostMapping("/list")
     @ResponseBody
@@ -83,13 +86,14 @@ public class SysPetController extends BaseController {
     public String add(ModelMap mmap) {
         return prefix + "/add";
     }
-/**
-    *@Author hst
-    *@Description //TODO 新增宠物页面请求接口
-    *@Date 上午8:40 2019/12/21
-    *@Param [file, sysPet]
-    * @return com.ruoyi.common.core.domain.AjaxResult
-    **/
+
+    /**
+     * @return com.ruoyi.common.core.domain.AjaxResult
+     * @Author hst
+     * @Description //TODO 新增宠物页面请求接口
+     * @Date 上午8:40 2019/12/21
+     * @Param [file, sysPet]
+     **/
     @RequiresPermissions("system:pet:add")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
@@ -114,13 +118,14 @@ public class SysPetController extends BaseController {
         }
         return error();
     }
-/**
-    *@Author hst
-    *@Description //TODO 宠物信息删除接口
-    *@Date 上午8:40 2019/12/21
-    *@Param [ids]   传入宠物id数组 支持批量删除
-    * @return com.ruoyi.common.core.domain.AjaxResult
-    **/
+
+    /**
+     * @return com.ruoyi.common.core.domain.AjaxResult
+     * @Author hst
+     * @Description //TODO 宠物信息删除接口
+     * @Date 上午8:40 2019/12/21
+     * @Param [ids]   传入宠物id数组 支持批量删除
+     **/
     @RequiresPermissions("system:pet:remove")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/remove")
@@ -141,27 +146,33 @@ public class SysPetController extends BaseController {
         mmap.put("pet", petService.selectPetById(petId));
         return prefix + "/edit";
     }
-/**
-    *@Author hst
-    *@Description //TODO 修改宠物信息页面数据提交接口
-    *@Date 上午8:41 2019/12/21
-    *@Param [file, sysPet]
-    * @return com.ruoyi.common.core.domain.AjaxResult
-    **/
+
+    /**
+     * @return com.ruoyi.common.core.domain.AjaxResult
+     * @Author hst
+     * @Description //TODO 修改宠物信息页面数据提交接口
+     * @Date 上午8:41 2019/12/21
+     * @Param [file, sysPet]
+     **/
     @RequiresPermissions("system:pet:edit")
     @Log(title = "宠物管理", businessType = BusinessType.INSERT)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(@RequestParam("file") MultipartFile file, @Validated SysPet sysPet) throws IOException {
-        // 上传文件路径
-        String filePath = Global.getUploadPath();
-        // 上传并返回新文件名称
-        String fileName = FileUploadUtils.upload(filePath, file);
-        String url = serverConfig.getUrl() + fileName;
+    public AjaxResult editSave(@RequestParam("file") @Nullable MultipartFile file, @Validated SysPet sysPet) throws IOException {
+        if (file!=null) {
+            // 上传文件路径
+            String filePath = Global.getUploadPath();
+            // 上传并返回新文件名称
+            String fileName = FileUploadUtils.upload(filePath, file);
+            String url = serverConfig.getUrl() + fileName;
+            sysPet.setImageUrl(url);
+        }else{
+            String imageUrl = petService.findImageUrl(sysPet.getId());
+            sysPet.setImageUrl(imageUrl);
+        }
         sysPet.setCreateBy(ShiroUtils.getLoginName());
         sysPet.setCreateTime(new Date());
         sysPet.setAdoptStatu(0);
-        sysPet.setImageUrl(url);
         sysPet.setDel_flag(0);
         sysPet.setUpdateBy(ShiroUtils.getLoginName());
         sysPet.setUpdateTime(new Date());
@@ -171,17 +182,18 @@ public class SysPetController extends BaseController {
         }
         return error();
     }
+
     @GetMapping("/donate")
     public String donate() {
         return prefix + "/donate/donate";
     }
 
     /**
-     *@Author hst
-     *@Description //TODO 宠物捐赠信数据请求接口
-     *@Date 上午8:38 2019/12/21
-     *@Param [sysPet]
      * @return com.ruoyi.common.core.page.TableDataInfo
+     * @Author hst
+     * @Description //TODO 宠物捐赠信数据请求接口
+     * @Date 上午8:38 2019/12/21
+     * @Param [sysPet]
      **/
     @RequiresPermissions("system:pet:list")
     @PostMapping("/donateList")
