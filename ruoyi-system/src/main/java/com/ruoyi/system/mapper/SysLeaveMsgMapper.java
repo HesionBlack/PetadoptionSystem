@@ -44,4 +44,19 @@ public interface SysLeaveMsgMapper {
 
     @Select("SELECT * FROM user_leaveMsg_reply WHERE msgId=#{id} ORDER BY replyTime DESC")
     List<SysLeaveMsgReply> findReplyById(String id);
+    @Delete("<script>" +
+            "DELETE FROM user_leavemsg_reply  where msgId in" +
+            "<foreach collection=\"ids\" item=\"id\" open=\"(\" separator=\",\" close=\")\">" +
+            "#{id}" +
+            "</foreach> " +
+            "</script>")
+    void deleteReplyById(@Param("ids") String[] ids);
+    @Delete("<script>" +
+            "DELETE FROM user_leavemsg  where id in" +
+            "<foreach collection=\"ids\" item=\"id\" open=\"(\" separator=\",\" close=\")\">" +
+            "#{id}" +
+            "</foreach> " +
+            "</script>")
+    int deleteLeaveById(@Param("ids") String[] ids);
+
 }

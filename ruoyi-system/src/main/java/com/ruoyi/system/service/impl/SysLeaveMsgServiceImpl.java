@@ -56,4 +56,16 @@ public class SysLeaveMsgServiceImpl implements ISysLeaveMsgService {
     public List<SysLeaveMsgReply> findReplyById(String id) {
         return sysLeaveMsgMapper.findReplyById(id);
     }
+
+    @Override
+    public void deleteReplyById(String ids) {
+        String[] id = ids.split(",");
+        sysLeaveMsgMapper.deleteReplyById(id);
+    }
+
+    @Override
+    public int deleteLeaveById(String ids) {
+        String[] id = ids.split(",");
+        return sysLeaveMsgMapper.deleteLeaveById(id);
+    }
 }

@@ -15,6 +15,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysLeaveMsgReply;
 import com.ruoyi.system.domain.UserLeaveMsg;
 import com.ruoyi.system.service.ISysLeaveMsgService;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,5 +84,16 @@ public class SysLeaveMsgController extends BaseController {
             return error(e.getMessage());
         }
 
+    }
+
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids) {
+        try {
+            sysLeaveMsgService.deleteReplyById(ids);
+            return toAjax(sysLeaveMsgService.deleteLeaveById(ids));
+        } catch (Exception e) {
+            return error(e.getMessage());
+        }
     }
 }

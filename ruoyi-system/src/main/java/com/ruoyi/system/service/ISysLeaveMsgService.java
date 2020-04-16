@@ -24,4 +24,8 @@ public interface ISysLeaveMsgService {
     int setReplyStatu(String id);
 
     List<SysLeaveMsgReply> findReplyById(String id);
+
+    void deleteReplyById(String ids);
+
+    int deleteLeaveById(String ids);
 }
